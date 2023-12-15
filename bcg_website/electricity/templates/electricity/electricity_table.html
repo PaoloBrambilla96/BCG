@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+<head>
+{% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Businnes Continuity Game</title>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">-->
+    <link rel="stylesheet" href="{% static 'bulma.min.css' %}">
+    <!--<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="{% static 'ionicons.min.css' %}">
+    <link rel="icon" href="{% static 'favico.png' %}", sizes="32x32">
+</head>
+
+
+<body class="has-background-info-light has-navbar-fixed-top p-2">
+{% load static %}
+
+
+{% include "electricity/electricity_navbar.html" %}
+                <div class="card m-5 has-background-grey-lighter" style="height: 86vh; min-height: 700px;">
+                  <div class="card-content" style="height: 100%;">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image is-48x48">
+                          <img src="{% static 'card_icon.png' %}" alt="auto parts icon">
+                        </figure>
+                      </div>
+                      <div class="media-content">
+                        <p class="title is-4 has-text-grey-dark">Auto-parts manufacturer</p>
+                      </div>
+                    </div>
+
+                    <div class="content" style="height: 93%;">
+                      <div class="box" style="max-height: 100%; overflow: auto;">
+                        <table class="table is-bordered has-text-centered">
+                          <thead>
+                            <tr class="has-text-centered">
+                              <th colspan="4" class="has-text-centered">Execution</th>
+                              <th colspan="16" class="has-text-centered">Strategy</th>
+                              <th>RESULTS</th>
+                            </tr>
+                            <tr class="has-text-centered">
+                              <th>ID</th>
+                              <th>Data</th>
+                              <th>Time</th>
+                              <th>Group</th>
+                              <th>1</th>
+                              <th>2.1</th>
+                              <th>2.2</th>
+                              <th>2.3</th>
+                              <th>2.4</th>
+                              <th>2.5</th>
+                              <th>2.6</th>
+                              <th>3.1</th>
+                              <th>3.2</th>
+                              <th>4.1</th>
+                              <th>4.2</th>
+                              <th>4.3</th>
+                              <th>5.1</th>
+                              <th>5.2</th>
+                              <th>5.3</th>
+                              <th>6</th>
+                              <th>COST</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for line in data %}
+                            <tr>
+                              <td>{{ line.id_tot }}</td>
+                              <td>{{ line.data }}</td>
+                              <td>{{ line.ora }}</td>
+                              <td>{{ line.grp }}</td>
+                              <td>{{ line.strategy1 }}</td>
+                              <td>{{ line.strategy2_1 }}</td>
+                              <td>{{ line.strategy2_2 }}</td>
+                              <td>{{ line.strategy2_3 }}</td>
+                              <td>{{ line.strategy2_4 }}</td>
+                              <td>{{ line.strategy2_5 }}</td>
+                              <td>{{ line.strategy2_6 }}</td>
+                              <td>{{ line.strategy3_1 }}</td>
+                              <td>{{ line.strategy3_2 }}</td>
+                              <td>{{ line.strategy4_1 }}</td>
+                              <td>{{ line.strategy4_2 }}</td>
+                              <td>{{ line.strategy4_3 }}</td>
+                              <td>{{ line.strategy5_1 }}</td>
+                              <td>{{ line.strategy5_2 }}</td>
+                              <td>{{ line.strategy5_3 }}</td>
+                              <td>{{ line.strategy6 }}</td>
+                              <th>{{ line.final_result }}</th>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+  
+
+                    </div>
+                      
+
+                  </div>
+                </div>
+
+
+
+
+
+<script type="module" src="{% static 'ionicons.esm.js' %}"></script>
+<script nomodule src="{% static 'ionicons.js' %}"></script>
+
+
+
+</body>
+
+
+</html>

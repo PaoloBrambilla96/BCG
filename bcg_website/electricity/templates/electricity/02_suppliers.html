@@ -1,0 +1,70 @@
+
+{% extends 'electricity/electricity_base.html' %}
+
+{% block title %}
+
+Key Suppliers
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="columns" style="height: 100%;">
+  <div class="column" style="height: 100%;">
+    <div class="card" style="max-height: 100%; overflow: auto;">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48 mx-0">
+              <img src="{% static 'key_supplier.png' %}" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4 has-text-dark">KEY SUPPLIERS</p>
+          </div>
+        </div>
+        <div class="content">
+            <ul>
+              <li>Materials’ supplier, that provides all the materials needed for operations.</li>
+              <li>Petrol refueling, that is fundamental for the fleet of vehicles that must be always ready to respond immediately in case of emergencies. Currently, Eldy keeps at stock a quantity of fuel sufficient for 20 days of operations.</li>
+              <li>Fleet supplier, that delivers new vehicles in case of need.</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column" style="height: 100%;">
+    <div class="card" style="max-height: 100%; overflow: auto;">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48 mx-0">
+              <img src="{% static 'external_dependencies.png' %}" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4 has-text-dark">EXTERNAL DEPENDENCIES</p>
+          </div>
+        </div>
+        <div class="content">
+          <ul>
+            <li>Electricity transmission phase, whose disruption determines a disruption also of the medium and low voltage lines.</li>
+            <li>Telecommunication, whose disruption interrupts all the information flows, the digital monitoring of the network and the metering. </li>
+            <li>Road transportation network, whose disruption doesn’t allow the emergency response team to intervene immediately in case of issues and problems in the distribution network.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+{% endblock %}
+
+
+{% block menu %}
+	{% include "electricity/electricity_menu.html" with page=2 %}
+{% endblock %}
+

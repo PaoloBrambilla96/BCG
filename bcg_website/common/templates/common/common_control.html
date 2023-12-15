@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+<head>
+{% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Businnes Continuity Game</title>
+    <link rel="stylesheet" href="{% static 'bulma.min.css' %}">
+    <link rel="icon" href="{% static 'favico.png' %}", sizes="32x32">
+</head>
+
+
+<body class="has-background-info-light has-navbar-fixed-top p-2">
+{% load static %}
+
+
+{% include "common/common_navbar.html" %}
+
+<div class="card m-5 has-background-grey-lighter" style="height: 86vh; min-height: 700px;">
+  <div class="card-content" style="height: 100%;">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <img src="{% static 'icons/settings-outline.svg' %}">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4 has-text-grey-dark">ADMINISTRATOR CONTROL PANEL</p>
+      </div>
+    </div>
+
+    <div class="content" style="height: 93%;">
+                <div class="box" style="max-height: 100%; overflow: auto;">
+
+				{% if user.is_authenticated %}
+
+			            <a class="button is-light is-size-4" href="{% url 'logout'%}">
+			                <span class="icon">
+			                    <ion-icon src="{% static 'icons/log-out-outline.svg' %}"></ion-icon>
+			                </span>
+			                <span><strong>LOGOUT</strong></span>
+			            </a>
+
+	              		{% if user.is_superuser  %}
+
+				                <a class="button is-warning is-size-4" href="../../admin/">
+				                    <span class="icon">
+				                        <ion-icon src="{% static 'icons/apps-outline.svg' %}"></ion-icon>
+				                    </span>
+				                    <span><strong>ADMIN DASH</strong></span>
+				                </a>
+
+				        {% endif %}
+				        <br>
+				        <br>
+
+
+
+
+
+
+
+				        {% if user.is_superuser  %}
+				        <div class="columns">
+
+
+				        	<div class="column">
+				        		<div class="card">
+								  <div class="card-content">
+								  	<a href="{% url 'autoparts-introduction' %}">
+								    <div class="media">
+								      <div class="media-left">
+								        <figure class="image is-48x48">
+								          <img src="{% static 'card_icon.png' %}">
+								        </figure>
+								      </div>
+								      <div class="media-content">
+								        <p class="title is-4">Auto parts manufacturer</p>
+								      </div>
+								    </div>
+								    </a>
+
+								    <div class="content">
+								    	<hr>
+								    	<table>
+								    		<tr>
+								    			<td>
+								    				BIA form is {% if autoparts_bia_running %} <span class="tag is-success">OPEN</span> {% else %} <span class="tag is-danger">CLOSED</span> {% endif %}
+								    			</td>
+								    			<td>
+								    				{% if autoparts_bia_running %}
+								    				<a class="button is-danger is-size-6 my-0" href="{% url 'autoparts-bia-running' %}">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/close-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>STOP</strong></span>
+						                </a>
+						                {% else %}
+						                <a class="button is-success is-size-6 my-0" href="{% url 'autoparts-bia-running' %}">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/arrow-forward-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>START</strong></span>
+						                </a>
+						                {% endif %}
+								    			</td>
+								    		</tr>
+								    		<tr>
+								    			<td>
+								    				STRATEGY form is {% if autoparts_strategy_running %} <span class="tag is-success">OPEN</span> {% else %} <span class="tag is-danger">CLOSED</span> {% endif %}
+								    			</td>
+								    			<td>
+								    				{% if autoparts_strategy_running %}
+								    				<a class="button is-danger is-size-6 my-0" href="{% url 'autoparts-strategy-running' %}">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/close-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>STOP</strong></span>
+						                </a>
+						                {% else %}
+								    				<a class="button is-success is-size-6 my-0" href="{% url 'autoparts-strategy-running' %}">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/arrow-forward-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>START</strong></span>
+						                </a>
+						                {% endif %}
+								    			</td>
+								    		</tr>
+								    	</table>
+								    	
+								    
+								    	<hr>
+								    	<a class="button is-info is-size-5 my-2" href="{% url 'autoparts-results-table' %}">
+				                <span class="icon">
+				                  <ion-icon src="{% static 'icons/trophy-outline.svg' %}"></ion-icon>
+				                </span>
+				                <span><strong>SCORES</strong></span>
+			                </a>
+
+			                <br>
+								    	<hr>
+								    	<a class="button is-danger is-size-7 my-2" href="{% url 'autoparts-clear-table' %}">
+				                <span class="icon">
+				                  <ion-icon src="{% static 'icons/warning-outline.svg' %}"></ion-icon>
+				                </span>
+				                <span><strong>RESET ALL SCORES</strong></span>
+			                </a>
+
+
+
+								    </div>
+								  </div>
+								</div>
+				        		
+				        	</div>
+
+
+
+
+				        	<div class="column">
+				        		<div class="card">
+								  <div class="card-content">
+								  	<a href="{% url 'electricity-description' %}">
+								    <div class="media">
+								      <div class="media-left">
+								        <figure class="image is-48x48">
+								          <img src="{% static 'electricity_icon.png' %}">
+								        </figure>
+								      </div>
+								      <div class="media-content">
+								        <p class="title is-4">Electricity distributor</p>
+								      </div>
+								    </div>
+								    </a>
+
+								    <div class="content">
+								    	<hr>
+								    	<table>
+								    		<tr>
+								    			<td>
+								    				BIA form is {% if electricity_bia_running %} <span class="tag is-success">OPEN</span> {% else %} <span class="tag is-danger">CLOSED</span> {% endif %}
+								    			</td>
+								    			<td>
+								    				{% if electricity_bia_running %}
+								    				<a class="button is-danger is-size-6 my-0" href="{% url 'electricity-bia-running' %}">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/close-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>STOP</strong></span>
+						                </a>
+						                {% else %}
+						                <a class="button is-success is-size-6 my-0" href="{% url 'electricity-bia-running' %}">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/arrow-forward-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>START</strong></span>
+						                </a>
+						                {% endif %}
+								    			</td>
+								    		</tr>
+								    		<tr>
+								    			<td>
+								    				STRATEGY form is {% if electricity_strategy_running %} <span class="tag is-success">OPEN</span> {% else %} <span class="tag is-danger">CLOSED</span> {% endif %}
+								    			</td>
+								    			<td>
+								    				{% if electricity_strategy_running %}
+								    				<a class="button is-danger is-size-6 my-0" href="{% url 'electricity-strategy-running' %}">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/close-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>STOP</strong></span>
+						                </a>
+						                {% else %}
+								    				<a class="button is-success is-size-6 my-0" href="{% url 'electricity-strategy-running' %}">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/arrow-forward-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>START</strong></span>
+						                </a>
+						                {% endif %}
+								    			</td>
+								    		</tr>
+								    	</table>
+								    	
+								    
+								    	<hr>
+								    	<a class="button is-info is-size-5 my-2" href="{% url 'electricity-results-table' %}">
+				                <span class="icon">
+				                  <ion-icon src="{% static 'icons/trophy-outline.svg' %}"></ion-icon>
+				                </span>
+				                <span><strong>SCORES</strong></span>
+			                </a>
+
+			                <br>
+								    	<hr>
+								    	<a class="button is-danger is-size-7 my-2" href="{% url 'electricity-clear-table' %}">
+				                <span class="icon">
+				                  <ion-icon src="{% static 'icons/warning-outline.svg' %}"></ion-icon>
+				                </span>
+				                <span><strong>RESET ALL SCORES</strong></span>
+			                </a>
+
+
+
+								    </div>
+								  </div>
+								</div>
+
+				        	</div>
+
+
+				        	<div class="column">
+				        		<div class="card">
+								  <div class="card-content">
+								  	<a href="{% url 'electricity-description' %}">
+								    <div class="media">
+								      <div class="media-left">
+								        <figure class="image is-48x48">
+								          <img src="{% static 'logistics_icon.png' %}">
+								        </figure>
+								      </div>
+								      <div class="media-content">
+								        <p class="title is-4">Logistics provider</p>
+								      </div>
+								    </div>
+								    </a>
+
+								    <div class="content">
+								    	<hr>
+								    	BIA form is {% if logistics_bia_running %} <span class="tag is-success">OPEN</span> {% else %} <span class="tag is-danger">CLOSED</span> {% endif %}
+								    	<br>
+								    	{% if logistics_bia_running %}
+								    	<a class="button is-danger is-size-5 my-2" href="#">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/close-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>STOP</strong></span>
+						                </a>
+						                {% else %}
+								    	<a class="button is-success is-size-5 my-2" href="#">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/arrow-forward-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>START</strong></span>
+						                </a>
+						                {% endif %}
+
+
+								    	<hr>
+						                STRATEGY form is {% if logistics_strategy_running %} <span class="tag is-success">OPEN</span> {% else %} <span class="tag is-danger">CLOSED</span> {% endif %}
+						                <br>
+								    	{% if logistics_strategy_running %}
+								    	<a class="button is-danger is-size-5 my-2" href="#">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/close-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>STOP</strong></span>
+						                </a>
+						                {% else %}
+								    	<a class="button is-success is-size-5 my-2" href="#">
+							                <span class="icon">
+							                  <ion-icon src="{% static 'icons/arrow-forward-circle-outline.svg' %}"></ion-icon>
+							                </span>
+							                <span><strong>START</strong></span>
+						                </a>
+						                {% endif %}
+								    	<br>
+								    </div>
+								  </div>
+								</div>
+				        		
+				        	</div>
+				        </div>
+
+				               
+
+							{% endif %}
+
+					{% else %}
+
+
+			            <div class="navbar-item">
+			            	<p class="text is-4 has-text-dark">Login required</p>
+			            </div>
+			            <a class="button is-light is-size-4" href="{% url 'login'%}">
+			                <span class="icon">
+			                    <ion-icon src="{% static 'icons/log-in-outline.svg' %}"></ion-icon>
+			                </span>
+			                <span><strong>LOGIN</strong></span>
+			            </a>
+
+					{% endif %}
+
+				</div>
+
+    </div>
+      
+
+  </div>
+</div>
+  
+
+
+
+<script type="module" src="{% static 'ionicons.esm.js' %}"></script>
+<script nomodule src="{% static 'ionicons.js' %}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+</script>
+
+
+
+
+</body>
+
+
+</html>
+

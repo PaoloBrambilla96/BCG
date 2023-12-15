@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+<head>
+{% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Businnes Continuity Game</title>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">-->
+    <link rel="stylesheet" href="{% static 'bulma.min.css' %}">
+    <!--<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="{% static 'ionicons.min.css' %}">
+    <link rel="icon" href="{% static 'favico.png' %}", sizes="32x32">
+</head>
+
+
+<body class="has-background-info-light has-navbar-fixed-top p-2">
+{% load static %}
+
+
+{% include "autoparts/autoparts_navbar.html" %}
+
+                <div class="card m-5 has-background-grey-lighter" style="height: 86vh; min-height: 700px;">
+                  <div class="card-content" style="height: 100%;">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image is-48x48">
+                          <img src="{% static 'card_icon.png' %}" alt="auto parts icon">
+                        </figure>
+                      </div>
+                      <div class="media-content">
+                        <p class="title is-4 has-text-grey-dark">Auto-parts manufacturer - {% block title %}
+
+
+                            {% endblock %}</p>
+                      </div>
+                    </div>
+
+                    <div class="content" style="height: 93%;">
+                      <div class="columns" style="height: 100%;">
+
+                        <div class="column is-10" style="height: 100%;">
+                          <div class="box" style="max-height: 100%; overflow: auto;">
+
+                            {% if user.is_authenticated %}
+
+                              	{% block content %}
+
+
+                                {% endblock %}
+
+                            {% else %}
+
+                            <article class="message is-danger">
+                                <div class="message-header">
+                                    <p class="is-size-4">PERMISSION DENIED</p>
+                                </div>
+                                <div class="message-body">
+                                    <br><br>
+                                    <p class="is-size-5">Login required</p>
+                                    <br><br>
+                                </div>
+                            </article>
+
+
+                            {% endif %}
+
+
+                          </div>
+
+                        </div>
+
+                            {% if user.is_authenticated %}
+
+                                {% block menu %}
+
+
+                                {% endblock %}
+
+                            {% endif %}
+
+                      </div>
+
+                    </div>
+                      
+
+                  </div>
+                </div>
+  
+
+
+
+<script type="module" src="{% static 'ionicons.esm.js' %}"></script>
+<script nomodule src="{% static 'ionicons.js' %}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+</script>
+
+
+
+{% block scripts %}
+
+
+
+{% endblock %}
+
+
+
+</body>
+
+
+</html>

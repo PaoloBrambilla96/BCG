@@ -1,0 +1,185 @@
+
+
+{% extends 'electricity/electricity_base.html' %}
+
+{% block title %}
+
+Insurance options
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+To protect from financial losses following an earthquake, Carware has the possibility to buy a 10-year insurance policy that can cover:
+                            <ul>
+                              <li>infrastructure damage: damage to main facility, warehouse and logistics center;</li>
+                              <li>Other property damage: damage to IT system, stock, equipment and machinery;</li>
+                              <li>Loss of business income: loss of profit caused by business interruption; </li>
+                              <li>Business recovery: expenses incurred for business recovery (deployment costs).</li>
+                            </ul>
+                            <br>
+
+                            <table class="table is-bordered" style="max-width: 1000px;">
+                              <thead>
+                                <tr>
+                                  <td></td>
+                                  <th>Package 1</th>
+                                  <th>Package 2</th>
+                                  <th>Package 3</th>
+                                  <th>Package 4</th>
+                                  <th>Package 5</th>
+                                  <th>Full Insurance</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Physiscal infrastructure</td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                </tr>
+                                <tr>
+                                  <td>Other property</td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                </tr>
+                                <tr>
+                                  <td>Loss of business income</td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                </tr>
+                                <tr>
+                                  <td>Business recovery</td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-danger-light"></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                  <td class="has-background-success-light"><span class="icon">
+                                    <ion-icon src="{% static 'icons/checkmark-circle-outline.svg' %}"></ion-icon>
+                                  </span></td>
+                                </tr>
+                                <tr>
+                                  <th>PRICE</th>
+                                  <th>€300K</th>
+                                  <th>€320K</th>
+                                  <th>€350K</th>
+                                  <th>€310K</th>
+                                  <th>€15K</th>
+                                  <th>€600K</th>
+                                </tr>
+                              </tbody>
+                            </table>
+
+
+
+
+
+                            <br>
+                            Comparison between full and individual insurance coverage reporting the maximum amount of reimbursement that the insurance can provide to Carware in case of disruption.
+                            <br><br>
+
+                            <img src="{% static 'insurance.png' %}" width="800">
+
+                            <br>
+                            <br>
+                            <table class="table is-bordered">
+                              <tr>
+                                <th rowspan="5">FULL COVERAGE</th>
+                                <td>Physical infrastructure damage, other properties, and loss of business income</td>
+                                <td>€50M</td>
+                              </tr>
+                              <tr>
+                                <td>Business recovery in case of magnitude 5-6</td>
+                                <td>€7M</td>
+                              </tr>
+                              <tr>
+                                <td>Business recovery in case of magnitude 6-7</td>
+                                <td>€10M</td>
+                              </tr>
+                              <tr>
+                                <td>Business recovery in case of magnitude 7-8</td>
+                                <td>€15M</td>
+                              </tr>
+                              <tr>
+                                <td>Business recovery in case of magnitude 8+</td>
+                                <td>€20M</td>
+                              </tr>
+
+
+                              <tr>
+                                <th rowspan="7">INDIVIDUAL COVERAGE</th>
+                                <td>Physical infrastructure damage</td>
+                                <td>€10M</td>
+                              </tr>
+                              <tr>
+                                <td>Other property</td>
+                                <td>€15M</td>
+                              </tr>
+                              <tr>
+                                <td>Loss of Profit</td>
+                                <td>€30M</td>
+                              </tr>
+                              <tr>
+                                <td>Business recovery in case of magnitude 5-6</td>
+                                <td>€4M</td>
+                              </tr>
+                              <tr>
+                                <td>Business recovery in case of magnitude 6-7</td>
+                                <td>€5M</td>
+                              </tr>
+                              <tr>
+                                <td>Business recovery in case of magnitude 7-8</td>
+                                <td>€6M</td>
+                              </tr>
+                              <tr>
+                                <td>Business recovery in case of magnitude 8+</td>
+                                <td>€7M</td>
+                              </tr>
+                            </table>
+                      
+
+                          
+ 
+
+{% endblock %}
+
+
+{% block menu %}
+  {% include "electricity/electricity_menu.html" with page=7 %}
+{% endblock %}

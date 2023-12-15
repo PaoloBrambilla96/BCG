@@ -1,0 +1,122 @@
+
+{% extends 'electricity/electricity_base.html' %}
+
+{% block title %}
+
+Resilience practices
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+Resilience is defined as the ability of the network and its components to absorb disruptive events in a rapid and effective way and retain operational integrity, ensuring the preservation, restoration or improvement of the infrastructures and the essential functionalities of the network.
+<br>
+<br>
+
+<table class="has-text-centered" style="table-layout: fixed">
+  <tr>
+    <td colspan="2"><div class="notification is-info is-size-4 py-2">4Rs approach</td>
+  </tr>
+  <tr>
+    <td><div class="notification is-info-light"> <strong>Risk prevention </strong><br>Actions able to minimize the probability of occurrence of the negative effects resulting from extreme natural events. In particular, based on the risk index associated to each voltage line, Eldy prioritizes the lines that require most urgent interventions.</div></td>
+    <td><div class="notification is-info-light"> <strong>Readiness </strong><br>Actions to increase the forecasting and monitoring capacity of the network in extreme natural conditions, also by collaborating with other public utility companies and institutions.</div></td>
+  </tr>
+  <tr>
+    <td><div class="notification is-info-light"> <strong>Response </strong><br>Planning, execution and communication during the emergency. Interaction with citizens is crucial and essential for the success of the actions implemented by the distribution companies.</div></td>
+    <td><div class="notification is-info-light"> <strong>Recovery </strong><br>Ability of the electricity distribution network to quickly return to ordinary operating conditions. In particular, network interconnections increase resilience by providing alternative power supply routes.</div></td>
+  </tr>
+</table>
+
+<br>
+<br>
+
+The table below displays interdependencies that each activity has with other external or internal factors. If one or more of the reported elements are disrupted, the functionality of the corresponding activity can be partially or totally compromised.
+<br>
+
+
+<table class="table is-bordered">
+  <thead>
+    <tr>
+      <th>INTERDEPENDECIES</th>
+      <th>Responsible Function</th>
+      <th>Infrastructure</th>
+      <th>Asset</th>
+      <th>Suppliers/ dependencies</th>
+      <th>Internal dependency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Electricity distribution</th>
+      <td>Electricity operations</td>
+      <td>Electrical infrastructures</td>
+      <td>/</td>
+      <td>Electricity transmission</td>
+      <td>Network monitoring and control; Maintenance</td>
+    </tr>
+    <tr>
+      <th>Network monitoring and control</th>
+      <td>Electricity operations</td>
+      <td>Operations center; IT infrastructure</td>
+      <td>/</td>
+      <td>Telecommunication</td>
+      <td>/</td>
+    </tr>
+    <tr>
+      <th>Emergency response to accidents</th>
+      <td>Electricity operations</td>
+      <td>Warehouse</td>
+      <td>Vehicles; Materials; Tools and equipment</td>
+      <td>Material supplier; Petrol refueling; Road network</td>
+      <td>Network monitoring and control</td>
+    </tr>
+    <tr>
+      <th>Maintenance (electrical  lines and meters)</th>
+      <td>Electricity maintenance</td>
+      <td>Warehouse</td>
+      <td>Vehicles; Materials; Tools and equipment</td>
+      <td>Material supplier; Petrol refueling; Road network</td>
+      <td>/</td>
+    </tr>
+    <tr>
+      <th>Metering</th>
+      <td>Metering department</td>
+      <td>Office; IT infrastructure</td>
+      <td>/</td>
+      <td>Telecommunication</td>
+      <td>Maintenance</td>
+    </tr>
+    <tr>
+      <th>Billing</th>
+      <td>Administration</td>
+      <td>Office; IT infrastructure</td>
+      <td>/</td>
+      <td>/</td>
+      <td>Metering</td>
+    </tr>
+    <tr>
+      <th>Commercial activities</th>
+      <td>Administration</td>
+      <td>IT infrastructure</td>
+      <td>/</td>
+      <td>Telecommunication</td>
+      <td>/</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+{% endblock %}
+
+
+{% block menu %}
+	{% include "electricity/electricity_menu.html" with page=3 %}
+{% endblock %}
+
+
+
+{% block scripts %}
+{% endblock %}
+

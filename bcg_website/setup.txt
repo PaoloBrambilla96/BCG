@@ -1,0 +1,23 @@
+Startup.txt
+
+cd /c/myclub/
+python -m venv virt
+source virt/Scripts/activate
+pip freeze
+pip install django
+django-admin startproject myclub_website
+cd myclub_website/
+python manage.py runserver
+
+
+python manage.py migrate
+winpty python manage.py createsuperuser
+
+
+python manage.py startapp events
+
+
+python manage.py makemigrations
+python manage.py migrate
+
+

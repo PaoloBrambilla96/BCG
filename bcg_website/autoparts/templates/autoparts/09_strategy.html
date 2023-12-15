@@ -1,0 +1,390 @@
+
+{% extends 'autoparts/autoparts_base.html' %}
+
+{% block title %}
+
+BC Strategies
+
+{% endblock %}
+
+{% block content %}
+
+{% if strategy_running %}
+
+        <form action="" name="myForm" id="myForm" method="POST">
+        {% csrf_token %}
+        <div class="notification is-info m-0 p-3">
+
+            <div class="columns has-text-dark">
+
+                <div class="column p-0">
+
+                    <div class="notification has-background-info-light p-2 m-2">
+
+                        <div class="mb-2">
+                        <h1 class="title is-5">Solution 1</h1>
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="p-0">Additional stocking capacity for finisched products:</td>
+                                <td class="px-2 py-0">0</td>
+                                <td class="p-0"><input class="slider is-fullwidth is-large py-0" step="1" min="0" max="10" value="{{ request.session.inputs_data.0 }}" type="range" name="input0" id="input0" oninput="document.getElementById('output0').innerText = this.value; cumpute_investment()"/></td>
+                                <td class="px-2 py-0">10</td>
+                                <th class="px-2 py-0"><span id="output0">{{ request.session.inputs_data.0 }}</span></th>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div class="mb-2">
+                        <h1 class="title is-5">Solution 2</h1>
+                        The total available additional stoking capacity for the next quantity is 30 (the sum of the quantity is limited to 30)
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td class="p-0">Additional stocking capacity for raw material:</td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="p-0"><input class="slider is-fullwidth is-large py-0" step="1" min="0" max="30" value="{{ request.session.inputs_data.1 }}" type="range" name="input1" id="input1" oninput="check_limit_values(this); cumpute_investment()" onclick="check_limit_values(this); cumpute_investment()"/></td>
+                                <td class="pl-0 pr-2 py-0">30</td>
+                                <th class="px-3 py-0" style="min-width:40px"><span id="output1">{{ request.session.inputs_data.1 }}</span></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Additional stocking capacity for internal parts:</td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="p-0"><input class="slider is-fullwidth is-large py-0" step="1" min="0" max="30" value="{{ request.session.inputs_data.2 }}" type="range" name="input2" id="input2" oninput="check_limit_values(this); cumpute_investment()" onclick="check_limit_values(this); cumpute_investment()"/></td>
+                                <td class="pl-0 pr-2 py-0">30</td>
+                                <th class="px-3 py-0" style="min-width:40px"><span id="output2">{{ request.session.inputs_data.2 }}</span></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Additional stocking capacity for external parts:</td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="p-0"><input class="slider is-fullwidth is-large py-0" step="1" min="0" max="30" value="{{ request.session.inputs_data.3 }}" type="range" name="input3" id="input3" oninput="check_limit_values(this); cumpute_investment()" onclick="check_limit_values(this); cumpute_investment()"/></td>
+                                <td class="pl-0 pr-2 py-0">30</td>
+                                <th class="px-3 py-0" style="min-width:40px"><span id="output3">{{ request.session.inputs_data.3 }}</span></th>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <td class="p-0">Default stocking level for raw material:</td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="p-0"><input class="slider is-fullwidth is-large" step="1" min="0" max="30" value="{{ request.session.inputs_data.4 }}" type="range" name="input4" id="input4" oninput="document.getElementById('maxval4').innerText = this.max; document.getElementById('output4').innerText = this.value; cumpute_investment()"/></td>
+                                <td class="pl-0 pr-2 py-0"><span id="maxval4">30</span></td>
+                                <th class="px-3 py-0" style="min-width:40px"><span id="output4">{{ request.session.inputs_data.4 }}</span></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Default stocking level for raw material:</td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="p-0"><input class="slider is-fullwidth is-large" step="1" min="0" max="20" value="{{ request.session.inputs_data.5 }}" type="range" name="input5" id="input5" oninput="document.getElementById('maxval5').innerText = this.max; document.getElementById('output5').innerText = this.value; cumpute_investment()"/></td>
+                                <td class="pl-0 pr-2 py-0"><span id="maxval5">20</span></td>
+                                <th class="px-3 py-0" style="min-width:40px"><span id="output5">{{ request.session.inputs_data.5 }}</span></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Default stocking level for raw material:</td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="p-0"><input class="slider is-fullwidth is-large" step="1" min="0" max="30" value="{{ request.session.inputs_data.6 }}" type="range" name="input6" id="input6" oninput="document.getElementById('maxval6').innerText = this.max; document.getElementById('output6').innerText = this.value; cumpute_investment()"/></td>
+                                <td class="pl-0 pr-2 py-0"><span id="maxval6">30</span></td>
+                                <th class="px-3 py-0" style="min-width:40px"><span id="output6">{{ request.session.inputs_data.6 }}</span></th>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div>
+                        <h1 class="title is-5">Solution 3</h1>
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td class="p-0">Backup manufacturing equipment:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio0_1" name="radio0" value="1" {% if request.session.radio_state.0 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio0_0" name="radio0" value="0" {% if request.session.radio_state.0 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Backup assembly equipment:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio1_1" name="radio1" value="1" {% if request.session.radio_state.1 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio1_0" name="radio1" value="0" {% if request.session.radio_state.1 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                        </table>
+
+
+                    </div>
+
+                </div>
+
+                <div class="column p-0">
+                    <div class="notification has-background-info-light p-2 m-2">
+
+                        <div class="mb-2">
+                        <h1 class="title is-5">Solution 4</h1> The total available additional stoking capacity for the next quantity is 30 (the sum of the quantity is limited to 30)
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td class="p-0">Alternative outbound transport (Finished products):</td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="py-0 px-0"><input class="slider is-fullwidth is-large" step="1" min="0" max="30" value="{{ request.session.inputs_data.7 }}" type="range" name="input7" id="input7" oninput="check_limit_values_2(this); cumpute_investment()" onclick="check_limit_values_2(this); cumpute_investment()"/></td>
+                                <td class="pr-2 pl-0 py-0">30</td>
+                                <th class="px-2 py-0" style="min-width:40px"><span id="output7">{{ request.session.inputs_data.7 }}</span></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Alternative inbound transport (Raw material): </td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="py-0 px-0"><input class="slider is-fullwidth is-large" step="1" min="0" max="30" value="{{ request.session.inputs_data.8 }}" type="range" name="input8" id="input8" oninput="check_limit_values_2(this); cumpute_investment()" onclick="check_limit_values_2(this); cumpute_investment()"/></td>
+                                <td class="pr-2 pl-0 py-0">30</td>
+                                <th class="px-2 py-0" style="min-width:40px"><span id="output8">{{ request.session.inputs_data.8 }}</span></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Alternative inbound transport (External parts): </td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="py-0 px-0"><input class="slider is-fullwidth is-large" step="1" min="0" max="30" value="{{ request.session.inputs_data.9 }}" type="range" name="input9" id="input9" oninput="check_limit_values_2(this); cumpute_investment()" onclick="check_limit_values_2(this); cumpute_investment()"/></td>
+                                <td class="pr-2 pl-0 py-0">30</td>
+                                <th class="px-2 py-0" style="min-width:40px"><span id="output9">{{ request.session.inputs_data.9 }}</span></th>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div>
+                        <h1 class="title is-5">Solution 5</h1>
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td class="p-0">Earthquake-proof Main Facility:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio2_1" name="radio2" value="1" {% if request.session.radio_state.2 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio2_0" name="radio2" value="0" {% if request.session.radio_state.2 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Warehouse reinforcement:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio3_1" name="radio3" value="1"  {% if request.session.radio_state.3 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio3_0" name="radio3" value="0"  {% if request.session.radio_state.3 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+
+                            <tr>
+                                <td class="p-0">Logistics Center reinforcement: </td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio4_1" name="radio4" value="1"  {% if request.session.radio_state.4 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="radio4_0" name="radio4" value="0"  {% if request.session.radio_state.4 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                        </table>
+
+
+                    </div>
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div>
+                        <h1 class="title is-5">Solution 6</h1>
+                        </div>
+                            <p1>Insurance package: </p1>
+
+                        <table style="max-width: 300px">
+                          <tr>
+                            <td class="p-0" style="width: 50px"><label class="radio">NO</label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">1 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">2 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">3 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">4 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">5 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">Full</label></td>
+                          </tr>
+                          <tr>
+                            <td class="p-0"><input type="radio" id="insurance0" name="insurance" value="0" {% if request.session.insurance == 0 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance1" name="insurance" value="1" {% if request.session.insurance == 1 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance2" name="insurance" value="2" {% if request.session.insurance == 2 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance3" name="insurance" value="3" {% if request.session.insurance == 3 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance4" name="insurance" value="4" {% if request.session.insurance == 4 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance5" name="insurance" value="5" {% if request.session.insurance == 5 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance6" name="insurance" value="6" {% if request.session.insurance == 6 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                          </tr>
+                        </table>
+                      </div>
+
+                      <div class="notification has-background-info-light p-2 m-2">
+
+                        <span class="is-size-6">Total BCP implementation cost (k€) : </span><input class="input m-0 px-1 py-0" type="text" id="investment" name="investment" value="0" style="width: 50px; max-height: 25px;" readonly>     
+                      </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="buttons is-right mt-2">
+                <input type="submit" value="Submit strategy Form" class="button is-info is-size-5">
+            </div>
+
+            
+        </form>
+
+{% else %}
+
+<article class="message is-danger">
+    <div class="message-header">
+        <p class="is-size-4">PERMISSION DENIED</p>
+    </div>
+    <div class="message-body">
+        <br><br>
+        <p class="is-size-5">Simulation is disabled by the administrator</p>
+        <br><br>
+    </div>
+</article>
+
+
+{% endif %}
+
+
+
+{% endblock %}
+
+
+{% block menu %}
+  {% include "autoparts/autoparts_menu.html" with page=9 %}
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+
+
+<script type="text/javascript">
+    function cumpute_investment(){
+        solution_3_price = 0;
+        solution_5_price = 0;
+        insurance_price = 0;
+        solution_1_price = Number(document.getElementById("input0").value)*3;
+        solution_2_price = Number(document.getElementById("input1").value)*1 + Number(document.getElementById("input2").value)*2 + Number(document.getElementById("input3").value)*2;
+        if (document.getElementById("radio0_1").checked){
+            solution_3_price = solution_3_price + 125;
+        }
+        if (document.getElementById("radio1_1").checked){
+            solution_3_price = solution_3_price + 75;
+        }
+        if (document.getElementById("radio2_1").checked){
+            solution_5_price = solution_5_price + 90;
+        }
+        if (document.getElementById("radio3_1").checked){
+            solution_5_price = solution_5_price + 50;
+        }
+        if (document.getElementById("radio4_1").checked){
+            solution_5_price = solution_5_price + 50;
+        }
+        if (document.getElementById("insurance1").checked){
+            insurance_price = 100;
+        }
+        if (document.getElementById("insurance2").checked){
+            insurance_price = 300;
+        }
+        if (document.getElementById("insurance3").checked){
+            insurance_price = 200;
+        }
+        if (document.getElementById("insurance4").checked){
+            insurance_price = 110;
+        }
+        if (document.getElementById("insurance5").checked){
+            insurance_price = 20;
+        }
+        if (document.getElementById("insurance6").checked){
+            insurance_price = 500;
+        }
+        total_investment = Number(insurance_price) + Number(solution_1_price) + Number(solution_2_price) + Number(solution_5_price) + Number(solution_3_price);
+        document.getElementById("investment").innerText = total_investment;
+        document.getElementById("investment").value = total_investment;
+    }
+    window.onload = cumpute_investment();
+</script>
+
+
+<script type="text/javascript">
+    function update_maximum(){
+        document.getElementById("maxval4").innerText = 20+Number(document.getElementById("input1").value)
+        document.getElementById("maxval5").innerText = 10+Number(document.getElementById("input2").value)
+        document.getElementById("maxval6").innerText = 20+Number(document.getElementById("input3").value)
+        document.getElementById("input4").max = 20+Number(document.getElementById("input1").value)
+        document.getElementById("input5").max = 10+Number(document.getElementById("input2").value)
+        document.getElementById("input6").max = 20+Number(document.getElementById("input3").value)
+    }
+    window.onload = update_maximum();
+</script>
+
+
+<script type="text/javascript">
+    function check_limit_values(field) {
+
+        var value1 = document.getElementById("input1").value;
+        var value2 = document.getElementById("input2").value;
+        var value3 = document.getElementById("input3").value;
+        var field4 = document.getElementById("input4");
+        var field5 = document.getElementById("input5");
+        var field6 = document.getElementById("input6");
+
+        if (field.name == "input1"){
+            field.value = Math.min(value1, 30-value2-value3);
+            field4.max = 20+Number(field.value);
+            field4.value = Math.min(field4.value, field4.max);
+            document.getElementById("output1").innerText = field.value;
+            document.getElementById("maxval4").innerText = 20+Number(field.value);
+            document.getElementById("output4").innerText = field4.value;
+        }
+        if (field.name == "input2"){
+            field.value = Math.min(value2, 30-value1-value3);
+            field5.max = 10+Number(field.value);
+            field5.value = Math.min(field5.value, field5.max);
+            document.getElementById("output2").innerText = field.value;
+            document.getElementById("maxval5").innerText = 10+Number(field.value);
+            document.getElementById("output5").innerText = field5.value;
+        }
+        if (field.name == "input3"){
+            field.value = Math.min(value3, 30-value2-value1);
+            field6.max = 20+Number(field.value);
+            field6.value = Math.min(field6.value, field6.max);
+            document.getElementById("output3").innerText = field.value;
+            document.getElementById("maxval6").innerText = 20+Number(field.value);
+            document.getElementById("output6").innerText = field6.value;
+        }
+    
+    }
+</script>
+
+<script type="text/javascript">
+    function check_limit_values_2(field) {
+
+        var value7 = document.getElementById("input7").value;
+        var value8 = document.getElementById("input8").value;
+        var value9 = document.getElementById("input9").value;
+
+        if (field.name == "input7"){
+            field.value = Math.min(value7, 30-value8-value9);
+            document.getElementById("output7").innerText = field.value;
+        }
+        if (field.name == "input8"){
+            field.value = Math.min(value8, 30-value7-value9);
+            document.getElementById("output8").innerText = field.value;
+        }
+        if (field.name == "input9"){
+            field.value = Math.min(value9, 30-value8-value7);
+            document.getElementById("output9").innerText = field.value;
+        }
+        
+    }
+</script>
+
+
+{% endblock %}
+

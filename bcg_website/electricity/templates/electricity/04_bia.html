@@ -1,0 +1,685 @@
+
+
+{% extends 'electricity/electricity_base.html' %}
+
+{% block title %}
+
+Business Impact Analysis
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+{% if electricity_bia_running %}
+
+
+<table>
+  <tr>
+    <td rowspan="2"><img src="{% static 'type_of_losses.png' %}" width="300"></td>
+    <td colspan="2">
+      <article class="message is-info">
+        <div class="message-header">
+          1 Irrecoverable losses:
+        </div>
+        <div class="message-body">
+          <ul>
+            <li>Losses coming from the impossibility of distributing electricity to the final users due to the disruption of one or more assets of the distribution infrastructure;</li>
+            <li>Losses coming from the impossibility of performing metering activities and consequently charging the corresponding price to the final users.</li>
+          </ul>
+        </div>
+      </article>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <article class="message is-info">
+        <div class="message-header">
+          2 Integrity loss of assets:
+        </div>
+        <div class="message-body">
+          Assets partially or totally destroyed following a disruption.
+        </div>
+      </article>
+    </td>
+    <td>
+      <article class="message is-info">
+        <div class="message-header">
+          3 Contractual penalties:
+        </div>
+        <div class="message-body">
+          Applied for the interruption of electricity distribution to hospitals and other essential services:
+          <ul>
+            <li>Over 2 days (€ 1M)</li>
+            <li>Over 10 days (€ 5M)</li>
+            <li>Over 30 days (€ 20M)</li>
+          </ul>
+        </div>
+      </article>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3"></td>
+  </tr>
+  <tr>
+    <td><img src="{% static 'effects_on_society.png' %}" width="300"></td>
+    <td>
+      <article class="message is-info">
+        <div class="message-header">
+          1 Power outages:
+        </div>
+        <div class="message-body">
+          Power outages with effects on:
+          <ul>
+            <li>Residential households</li>
+            <li>Commercial companies</li>
+            <li>Industrial sites</li>
+            <li>Transport infrastructure</li>
+            <li>Essential services</li>
+          </ul>
+        </div>
+      </article>
+    </td>
+    <td>
+      <article class="message is-info">
+        <div class="message-header">
+          2 Delay in emergency response to accidents:
+        </div>
+        <div class="message-body">
+          Delay in emergency response to accidents due to:
+          <ul>
+            <li>A disruption to monitoring and control systems</li>
+            <li>The inaccessibility of sites or unavailability of tools</li>
+          </ul>
+        </div>
+      </article>
+    </td>
+  </tr>
+</table>
+
+
+Starting from the information about the types of losses, players will be able to evaluate the financial impact over time that Eldy would suffer following a disruption.<br> 
+Players will have to fill the table calculating financial and societal impacts coming from the interruption of each activity for a certain number of days. For each activity, the severity of the impact over time can be evaluated in absent, low, medium or high.<br> 
+Finally, the obtained results will be used to assess the Maximum Tolerable Period of Disruption (MTPD) and the Recovery Time Objective (RTO).<br> 
+
+<br>
+<br>
+
+For each activity, the severity of the financial and societal impacts over time can be evaluated considering the following tables.
+<br>
+
+<strong>Severity of economic impacts.</strong>
+<br>
+<table class="table is-bordered">
+  <tbody>
+    <tr>
+      <th class="has-background-grey-lighter">0</th>
+      <th class="has-background-grey-lighter">No Impact</th>
+      <td>Economic loss = € 0</td>
+      <td>No Economic loss</td>
+    </tr>
+    <tr>
+      <th class="has-background-success">1</th>
+      <th class="has-background-success">Low</th>
+      <td>€ 0 < Economic loss <= € 10M</td>
+      <td>Economic Impact that can be absorbed but it requires an effort from management to absorb it</td>
+    </tr>
+    <tr>
+      <th class="has-background-warning">2</th>
+      <th class="has-background-warning">Medium</th>
+      <td>€ 10M < Economic loss <= € 40M</td>
+      <td>Economic Impact that can be absorbed but it requires an extraordinary involvement of management</td>
+    </tr>
+    <tr>
+      <th class="has-background-danger">3</th>
+      <th class="has-background-danger">High</th>
+      <td>Economic loss > € 40M</td>
+      <td>Economic impact that requires a change of strategy</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<strong>Severity of societal impacts.</strong>
+<br>
+<table class="table is-bordered">
+  <tbody>
+    <tr>
+      <th class="has-background-grey-lighter">0</th>
+      <th class="has-background-grey-lighter">No Impact</th>
+      <td>No impacts on society</td>
+    </tr>
+    <tr>
+      <th class="has-background-success">1</th>
+      <th class="has-background-success">Low</th>
+      <td>Impacts on society don’t affect the safety of citizens and the continuity of essential services</td>
+    </tr>
+    <tr>
+      <th class="has-background-warning">2</th>
+      <th class="has-background-warning">Medium</th>
+      <td>Impacts on society are serious and require extraordinary measures to be managed</td>
+    </tr>
+    <tr>
+      <th class="has-background-danger">3</th>
+      <th class="has-background-danger">High</th>
+      <td>Impacts on society are no more sustainable: the safety of citizens is compromised, essential services are disrupted and business activities are stopped</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<strong>Rememer to sbmit the table before to change page</strong>
+<br>
+
+<form action="" method="POST" id="BIA_form" name="BIA_form">
+{% csrf_token %}
+
+<table class="table is-bordered is-size-6">
+  <thead>
+    <tr>
+      <th rowspan="2" class="has-background-grey-lighter">Eldy's activities</th>
+      <th colspan="11">Impacts evaluation [days]</th>
+      <th rowspan="2">MTPD</th>
+      <th rowspan="2">RTO</th>
+    </tr>
+    <tr>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">Impact type</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">1-10</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">10-20</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">20-30</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">30-40</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">40-60</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">60-80</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">80-120</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">120-160</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">160-200</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">>200</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+    <tr>
+      <th rowspan="2">Electricity distribution</th>
+      <td class="py-0">Financial</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_0_{{n_col}}" name="table_0_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="MTPD_0" name="MTPD_0" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="RTO_0" name="RTO_0" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="py-0">Societal</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_1_{{n_col}}" name="table_1_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+    </tr>
+
+
+
+    <tr>
+      <th rowspan="2">Network monitoring and control</th>
+      <td class="py-0">Financial</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_2_{{n_col}}" name="table_2_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="MTPD_1" name="MTPD_1" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="RTO_1" name="RTO_1" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="py-0">Societal</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_3_{{n_col}}" name="table_3_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+    </tr>
+
+
+
+    <tr>
+      <th rowspan="2">Emergency response</th>
+      <td class="py-0">Financial</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_4_{{n_col}}" name="table_4_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="MTPD_2" name="MTPD_2" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="RTO_2" name="RTO_2" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="py-0">Societal</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_5_{{n_col}}" name="table_5_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+    </tr>
+
+
+
+    <tr>
+      <th rowspan="2">Maintenance (electricel lines and meters)</th>
+      <td class="py-0">Financial</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_6_{{n_col}}" name="table_6_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="MTPD_3" name="MTPD_3" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="RTO_3" name="RTO_3" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="py-0">Societal</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_7_{{n_col}}" name="table_7_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+    </tr>
+
+
+
+    <tr>
+      <th rowspan="2">Metering</th>
+      <td class="py-0">Financial</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_8_{{n_col}}" name="table_8_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="MTPD_4" name="MTPD_4" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="RTO_4" name="RTO_4" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="py-0">Societal</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_9_{{n_col}}" name="table_9_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+    </tr>
+
+
+
+    <tr>
+      <th rowspan="2">Billing</th>
+      <td class="py-0">Financial</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_10_{{n_col}}" name="table_10_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="MTPD_5" name="MTPD_5" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="RTO_5" name="RTO_5" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="py-0">Societal</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_11_{{n_col}}" name="table_11_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+    </tr>
+
+
+
+    <tr>
+      <th rowspan="2">Commercial activities</th>
+      <td class="py-0">Financial</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_12_{{n_col}}" name="table_12_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="MTPD_6" name="MTPD_6" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+      <td rowspan="2" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="RTO_6" name="RTO_6" class="has-background-grey-lighter" onchange="" onclick="">
+            {% for MN_value in cols_MN %}
+              <option class="" value="{{MN_value}}">{{MN_value}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="py-0">Societal</td>
+      {% for n_col in cols %}
+      <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+        <div class="select py-0 m-1">
+          <select id="table_13_{{n_col}}" name="table_13_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+            <option class="has-background-grey-lighter" value="0">0</option>
+            <option class="has-background-success" value="1">1</option>
+            <option class="has-background-warning" value="2">2</option>
+            <option class="has-background-danger" value="3">3</option>
+          </select>
+        </div>
+      </td>
+      {% endfor %}
+    </tr>
+
+
+  </tbody>
+  <tfoot>
+    <tr>
+      <th rowspan="2" class="has-background-grey-lighter">Eldy's activities</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">Impact type</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">1-10</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">10-20</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">20-30</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">30-40</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">40-60</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">60-80</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">80-120</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">120-160</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">160-200</th>
+      <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">>200</th>
+      <th rowspan="2">MTPD</th>
+      <th rowspan="2">RTO</th>
+    </tr>
+    <tr>
+      <th colspan="11">Impacts evaluation [days]</th>
+    </tr>
+  </tfoot>
+  <tbody>
+</table>
+
+<input class="button is-danger is-size-2" type="submit" value="SUBMIT TABLE"></input>
+
+</form>
+
+<br>
+<strong>Rememer to sbmit the table before to change page</strong>
+<br>
+
+{% else %}
+
+<article class="message is-danger">
+    <div class="message-header">
+        <p class="is-size-4">PERMISSION DENIED</p>
+    </div>
+    <div class="message-body">
+        <br><br>
+        <p class="is-size-5">Simulation is disabled by the administrator</p>
+        <br><br>
+    </div>
+</article>
+
+
+{% endif %}
+
+
+
+{% endblock %}
+
+
+{% block menu %}
+	{% include "electricity/electricity_menu.html" with page=4 %}
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript">
+      function update_color(element){ 
+          if(element.getElementsByTagName('option')[0].selected){
+            element.className = "has-background-grey-lighter"
+          }   
+          if(element.getElementsByTagName('option')[1].selected){
+            element.className = "has-background-success"
+          }   
+          if(element.getElementsByTagName('option')[2].selected){
+            element.className = "has-background-warning"
+          }   
+          if(element.getElementsByTagName('option')[3].selected){
+            element.className = "has-background-danger"
+          }
+      }
+    </script>
+
+    
+
+    <script type="text/javascript">
+      function select_option(){
+        {% for name, value in selectnames %}
+            document.getElementById("{{name}}").getElementsByTagName('option')[{{value}}].selected = true;
+            update_color(document.getElementById("{{name}}"));
+        {% endfor %}
+      }
+    window.onload = select_option();
+    </script>
+
+
+    <script type="text/javascript">
+      function select_option_2(){
+        {% for name, value in mtpdnames %}
+            for (let k=0; k<9; k++){
+              if (document.getElementById("MTPD_{{name}}").getElementsByTagName('option')[k].value == {{value}}){
+                document.getElementById("MTPD_{{name}}").getElementsByTagName('option')[k].selected = true;
+              }
+            }
+        {% endfor %}
+      }
+    window.onload = select_option_2();
+    </script>
+
+
+    <script type="text/javascript">
+      function select_option_3(){
+        {% for name, value in rtonames %}
+            for (let k=0; k<9; k++){
+              if (document.getElementById("RTO_{{name}}").getElementsByTagName('option')[k].value == {{value}}){
+                document.getElementById("RTO_{{name}}").getElementsByTagName('option')[k].selected = true;
+              }
+            }
+        {% endfor %}
+      }
+    window.onload = select_option_3();
+    </script>
+
+
+{% endblock %}

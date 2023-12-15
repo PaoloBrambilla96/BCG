@@ -1,0 +1,227 @@
+
+
+{% extends 'autoparts/autoparts_base.html' %}
+
+{% block title %}
+
+Description
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+
+Company : Carware, an auto-parts manufacturer<br><br>
+Location: Europe, in a region highly exposed to seismic risk<br><br>
+Revenues: €300 Million a year (€1M per day)<br><br>
+Business: Carware’s finished products require the assembly of two different types of parts, one produced internally and the other ordered externally. The internal parts, in turn, are produced using raw materials delivered from an external supplier.<br><br>
+
+
+
+<table class="table is-bordered">
+  <thead>
+    <tr>
+      <th>Business function</th>
+      <th>Main activities performed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Manufacturing department</td>
+      <td>Manufacturing process</td>
+    </tr>
+    <tr>
+      <td>Assembly department</td>
+      <td>Assembly process</td>
+    </tr>
+    <tr>
+      <td>Marketing and Sales</td>
+      <td>Order acquisition</td>
+    </tr>
+    <tr>
+      <td>Administration</td>
+      <td>Billing</td>
+    </tr>
+    <tr>
+      <td>IT services</td>
+      <td>IT systems management</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 class="subtitle is-4 has-text-dark">1.1. MAIN BUSINESS FUNCTIONS</h1>
+
+<table class="table is-bordered">
+  <tbody>
+    <tr>
+      <th><figure class="image is-48x48"><img src="{% static 'manufacturing_dpt.png' %}" alt="Placeholder image"></figure></th>
+      <th>Manufacturing department</th>
+      <td>Manufacturing manages and controls all functions related to the productivity processes of Carware that produce the aluminum auto-parts.
+      In this phase, raw materials are processed to produce internal parts, which are later used in assembly for finished products. 
+      For the sake of simplicity, it is assumed that raw materials are of a unique type and that are always used in the same rate.
+      The manufacturing plant operates on two 8-hour shifts, 6 days/week schedule, for 300 operating days/year. There are 25 people employed in this business function.</td>
+    </tr>
+    <tr>
+      <th><figure class="image is-48x48"><img src="{% static 'assembly_dpt.png' %}" alt="Placeholder image"></figure></th>
+      <th>Assembly department</th>
+      <td>Assembly manages and controls all functions related to the assembly processes of finished products for delivery. 
+      The finished products are produced by assembling internal and external parts, and they are customizable to a certain extent. For the sake of simplicity, it is assumed that the assembly process uses both stocks (internal and external parts) in a constant daily rate – i.e., each stock is consumed equally each day (1 day of level is consumed) in normal operation, regardless of the orders.
+      Carware uses Assemble-To-Order (ATO) manufacturing strategy where products are quickly assembled from components only once an order has been made. Specifically, Carware stocks up sub-assembly parts and inventories and assembles the parts into the final product when a customer places an order. The strategy relies on the ability of the company to assemble and deliver goods quickly. In this regard, it can be assumed that the time to assemble a product from components is negligible (within the same day of the order) compared to the time required to produce the parts (sub-components). 
+      Assembled parts (finished products) are directly loaded and shipped (no stock).
+      The assembly process operates on two 8-hour shifts, 5 days/week schedule, for 260 operating days/year. There are 20 people employed in this business function.
+</td>
+    </tr>
+    <tr>
+      <th><figure class="image is-48x48"><img src="{% static 'marketing_dpt.png' %}" alt="Placeholder image"></figure></th>
+      <th>Marketing and Sales</th>
+      <td>Marketing and Sales function covers promotion, selling, customer relation management, product management, marketing information management, pricing, financing and distribution. 
+      Marketing and Sales is responsible of managing online orders through the website of the company and offline orders received through a phone call. It is assumed that this task can be performed in Carware’s offices but also from home. For this reason, offline orders can be received even in the event of a disruption, since the staff can easily manage phone calls from home. In principle, also online orders can be managed from home, the only constraint is that the website must be operational since it is the only way to receive this kind of orders and to register all customer-related information.
+      In addition, Marketing and Sales staff identifies customers interested in activating contracts with Carware, that will be then arranged by Administration.
+      Marketing and Sales staff works in an 8-hour shift, 5 days/week schedule, for 260 operating days/year. There are 20 people employed in this business function.
+</td>
+    </tr>
+    <tr>
+      <th><figure class="image is-48x48"><img src="{% static 'administration_dpt.png' %}" alt="Placeholder image"></figure></th>
+      <th>Administration</th>
+      <td>Administration (Legal / Finance / HR) provides logistical assistance to the entire organization and to human resources, and it takes care of the finance and rules/regulations related to legal aspects, security and safety management and asset management. Another task performed by Administration is managing customers’ contracts. In addition, this function is responsible for the billing of all the orders acquired by Carware. It is assumed that administrative tasks can be performed in Carware’s offices but also from home, therefore the availability of this business function is guaranteed even in case of disruption. 
+      Administration staff works in an 8-hour shift, 5 days/week schedule, for 260 operating days/year. There are 12 people employed in this business function.
+</td>
+    </tr>
+    <tr>
+      <th><figure class="image is-48x48"><img src="{% static 'it_dpt.png' %}" alt="Placeholder image"></figure></th>
+      <th>IT services</th>
+      <td>IT services are responsible for the architecture, hardware, software and networking of computers in the company. In particular, it covers installation and maintenance of computer network systems within Carware. Moreover, it is responsible of Carware website functioning.
+      IT staff works in an 8-hour shift, 5 days/week schedule, for 260 operating days/year. There are 8 people employed in this business function.
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 class="subtitle is-4 has-text-dark">1.2. INFRASTRUCTURES AND ASSETS</h1>
+
+<table class="table is-bordered">
+  <tbody>
+    <tr>
+      <td>Main facility</td>
+      <th>€ 10M</th>
+    </tr>
+    <tr>
+      <td>Manufacturing equipment</td>
+      <th>€ 10M</th>
+    </tr>
+    <tr>
+      <td>Warehouse</td>
+      <th>€ 4M</th>
+    </tr>
+    <tr>
+      <td>Logistics center</td>
+      <th>€ 6M</th>
+    </tr>
+    <tr>
+      <td>Assembly equipment</td>
+      <th>€ 5M</th>
+    </tr>
+    <tr>
+      <td>IT infrastructure</td>
+      <th>€ 3M</th>
+    </tr>
+  </tbody>
+</table>
+
+<img src="{% static 'infrastructures.png' %}" width="700">
+<br>
+<br>
+The <strong>main facility</strong> is a large space comprised mostly of manufacturing space and some office space for employees of M&S, administration and IT services.
+<br>
+The <strong>warehouse</strong> is used to stock raw materials used in manufacturing and store both parts produced internally and externally, used in assembly. The warehouse can stock raw materials for a maximum of 20 days of manufacturing without restocking. Moreover, the warehouse space can stock 10 days of internal parts, so this can be used either as a buffer for assembly, or as an available storage space for internal parts (if assembly or shipping is disrupted). Similarly, it has space for stocking external parts, amounting for up to 10 days of assembly at normal operation. The current level of stocks are 10 days for raw materials, 5 days for internal parts and 5 days for external parts.
+<br>
+The <strong> logistic center</strong> is used for the unloading of supplied components, for the assembly of the finished products (assemble to order) and for directly shipping them to customers. Both inbound and outbound deliveries are made by train, since the logistics center is directly reachable by rails.
+<br>
+<strong>IT infrastructure</strong> (both hardware and software) is needed to support all the activities carried out by Carware.
+<br>
+
+
+<h1 class="subtitle is-4 has-text-dark">1.3. ORDER ACQUISITION</h1>
+
+<img src="{% static 'order_acquisition.png' %}" width="700">
+
+<br>
+<br>
+<br>
+
+<div class="columns">
+  <div class="column">
+    <article class="message">
+      <div class="message-header">
+        <p>CONTRACTUAL SALES</p>
+      </div>
+      <div class="message-body">
+        <ul>
+          <li>Proportion: 50% of total sales</li>
+          <li>Responsible: </li>
+            <ul>
+              <li>M&S for commercial aspects</li>
+              <li>Administration for contractual clauses</li>
+            </ul>
+          <li>In case of delay in delivery:</li>
+            <ul>
+              <li>Contractual penalties</li>
+              <li>No cancelation</li>
+            </ul>
+        </ul>
+      </div>
+    </article>
+  </div>
+  <div class="column">
+    <article class="message">
+      <div class="message-header">
+        <p>ONLINE SALES</p>
+      </div>
+      <div class="message-body">
+        <ul>
+          <li>Proportion: 25% of total sales</li>
+          <li>Responsible: </li>
+            <ul>
+              <li>M&S through the website of the company</li>
+            </ul>
+          <li>In case of delay in delivery:</li>
+            <ul>
+              <li>No contractual penalties</li>
+              <li>Cancelation after 20 days</li>
+            </ul>
+        </ul>
+      </div>
+    </article>
+  </div>
+  <div class="column">
+    <article class="message">
+      <div class="message-header">
+        <p>OFFLINE SALES</p>
+      </div>
+      <div class="message-body">
+        <ul>
+          <li>Proportion: 25% of total sales</li>
+          <li>Responsible: </li>
+            <ul>
+              <li>M&S through phone calls</li>
+            </ul>
+          <li>In case of delay in delivery:</li>
+            <ul>
+              <li>No contractual penalties</li>
+              <li>Cancelation after 20 days</li>
+            </ul>
+        </ul>
+      </div>
+    </article>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block menu %}
+	{% include "autoparts/autoparts_menu.html" with page=1 %}
+{% endblock %}
+

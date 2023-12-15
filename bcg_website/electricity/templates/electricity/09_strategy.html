@@ -1,0 +1,383 @@
+
+{% extends 'electricity/electricity_base.html' %}
+
+{% block title %}
+
+BC Strategies
+
+{% endblock %}
+
+{% block content %}
+
+{% if electricity_strategy_running %}
+
+        <form action="" name="myForm" id="myForm" method="POST">
+        {% csrf_token %}
+        <div class="notification is-info m-0 p-3">
+
+            <div class="columns has-text-dark">
+
+                <div class="column p-0">
+
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div class="mb-2">
+                        <h1 class="title is-5">Solution 1</h1>
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="p-0" style="width: 60%">Introducing satellite connectivity:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution1_Yes" name="solution1" value="1" {% if request.session.solution_data.0 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution1_No" name="solution1" value="0" {% if request.session.solution_data.0 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div class="mb-2">
+                        <h1 class="title is-5">Solution 2</h1>
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="p-0" style="width: 60%">Onsite metering:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution2_Yes" name="solution2" value="1" {% if request.session.solution_data.1 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution2_No" name="solution2" value="0" {% if request.session.solution_data.1 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div class="mb-2">
+                        <h1 class="title is-5">Solution 3</h1>
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="p-0" style="width: 60%">Electrical fleet:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution3_Yes" name="solution3" value="1" {% if request.session.solution_data.2 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution3_No" name="solution3" value="0" {% if request.session.solution_data.2 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div class="mb-2">
+                        <h1 class="title is-5">Solution 4</h1>
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="p-0">Fuel storage capacity:</td>
+                                <td class="pl-2 pr-1 py-0">0</td>
+                                <td class="p-0"><input class="slider is-fullwidth is-large py-0" step="1" min="0" max="30" value="{{ request.session.solution_data.3 }}" type="range" name="solution4" id="solution4" oninput="cumpute_investment()" onclick="cumpute_investment()"/></td>
+                                <td class="pl-0 pr-2 py-0">30</td>
+                                <th class="px-3 py-0" style="min-width:40px"><span id="solution4_out">{{ request.session.solution_data.3 }}</span></th>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div>
+                        <h1 class="title is-5">Solution 5</h1>
+                        </div>
+
+                        <table>
+                          <tr>
+                            <td class="p-0"><label class="radio">No backup operations center:</label></td>
+                            <td class="p-0"><input type="radio" id="solution5_1" name="solution5" value="0" {% if request.session.solution_data.4 == 0 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                          </tr>
+                          <tr>
+                            <td class="p-0"><label class="radio">Fixed backup operations center: </label></td>
+                            <td class="p-0"><input type="radio" id="solution5_2" name="solution5" value="1" {% if request.session.solution_data.4 == 1 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                          </tr>
+                          <tr>
+                            <td class="p-0"><label class="radio">Mobile backup operations center:</label></td>
+                            <td class="p-0"><input type="radio" id="solution5_3" name="solution5" value="2" {% if request.session.solution_data.4 == 2 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                          </tr>
+                        </table>
+                      </div>
+
+
+                </div>
+
+                <div class="column p-0">
+                    
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div>
+                        <h1 class="title is-5">Solution 6</h1>
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="p-0" style="width: 60%">Facilities reinforcement:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution6_1_Yes" name="solution6_1" value="1" {% if request.session.solution_data.5 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution6_1_No" name="solution6_1" value="0" {% if request.session.solution_data.5 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                            <tr>
+                                <td class="p-0" style="width: 60%">Warehouse reinforcement:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution6_2_Yes" name="solution6_2" value="1"  {% if request.session.solution_data.6 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution6_2_No" name="solution6_2" value="0"  {% if request.session.solution_data.6 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div>
+                        <h1 class="title is-5">Solution 7</h1>
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="p-0" style="width: 60%">Improving grid reliability:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution7_Yes" name="solution7" value="1"  {% if request.session.solution_data.7 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution7_No" name="solution7" value="0"  {% if request.session.solution_data.7 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div>
+                        <h1 class="title is-5">Solution 8</h1>
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="p-0" style="width: 60%">IT backup:</td>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution8_Yes" name="solution8" value="1"  {% if request.session.solution_data.8 == 1 %} checked {% endif %} onclick="cumpute_investment()"> Yes </label></th>
+                                <th class="py-0"><label class="radio pl-2"> <input type="radio" id="solution8_No" name="solution8" value="0"  {% if request.session.solution_data.8 == 0 %} checked {% endif %} onclick="cumpute_investment()"> No </label></th>
+                            </tr>
+                        </table>
+                    </div>
+
+
+
+                    <div class="notification has-background-info-light p-2 m-2">
+                        <div>
+                        <h1 class="title is-5">Insurance</h1>
+                        </div>
+                            <p1>Insurance package: </p1>
+
+                        <table style="max-width: 300px">
+                          <tr>
+                            <td class="p-0" style="width: 50px"><label class="radio">NO</label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">1 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">2 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">3 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">4 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">5 </label></td>
+                            <td class="p-0" style="width: 50px"><label class="radio">Full</label></td>
+                          </tr>
+                          <tr>
+                            <td class="p-0"><input type="radio" id="insurance0" name="insurance" value="0" {% if request.session.insurance == 0 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance1" name="insurance" value="1" {% if request.session.insurance == 1 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance2" name="insurance" value="2" {% if request.session.insurance == 2 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance3" name="insurance" value="3" {% if request.session.insurance == 3 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance4" name="insurance" value="4" {% if request.session.insurance == 4 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance5" name="insurance" value="5" {% if request.session.insurance == 5 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                            <td class="p-0"><input type="radio" id="insurance6" name="insurance" value="6" {% if request.session.insurance == 6 %} checked {% endif %} onclick="cumpute_investment()"></td>
+                          </tr>
+                        </table>
+                      </div>
+
+                      <div class="notification has-background-info-light p-2 m-2">
+
+                        <span class="is-size-6">Total BCP implementation cost (k€) : </span><input class="input m-0 px-1 py-0" type="text" id="investment" name="investment" value="0" style="width: 50px; max-height: 25px;" readonly>     
+                      </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="buttons is-right mt-2">
+                <input type="submit" value="Submit strategy Form" class="button is-info is-size-5">
+            </div>
+
+            
+        </form>
+
+{% else %}
+
+<article class="message is-danger">
+    <div class="message-header">
+        <p class="is-size-4">PERMISSION DENIED</p>
+    </div>
+    <div class="message-body">
+        <br><br>
+        <p class="is-size-5">Simulation is disabled by the administrator</p>
+        <br><br>
+    </div>
+</article>
+
+
+{% endif %}
+
+
+
+{% endblock %}
+
+
+{% block menu %}
+  {% include "electricity/electricity_menu.html" with page=9 %}
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+
+
+<script type="text/javascript">
+    function cumpute_investment(){
+
+        solution_1_price = 0;
+        if (document.getElementById("solution1_Yes").checked){
+            solution_1_price = 200;
+        }
+
+        solution_2_price = 0;
+        if (document.getElementById("solution2_Yes").checked){
+            solution_2_price = 5;
+        }
+
+        solution_3_price = 0;
+        if (document.getElementById("solution3_Yes").checked){
+            solution_3_price = 1000;
+        }
+
+        solution_4_price = Number(document.getElementById("solution4").value)*2;
+
+        solution_5_price = 0;
+        if (document.getElementById("solution5_2").checked){
+            solution_5_price = 500;
+        }
+        if (document.getElementById("solution5_3").checked){
+            solution_5_price = 200;
+        }
+
+        solution_6_price = 0;
+        if (document.getElementById("solution6_1_Yes").checked){
+            solution_6_price = solution_6_price + 90;
+        }
+        if (document.getElementById("solution6_2_Yes").checked){
+            solution_6_price = solution_6_price + 50;
+        }
+
+        solution_7_price = 0;
+        if (document.getElementById("solution7_Yes").checked){
+            solution_7_price = 1000;
+        }
+
+        solution_8_price = 0;
+        if (document.getElementById("solution8_Yes").checked){
+            solution_8_price = 500;
+        }
+
+        insurance_price = 0;    
+        if (document.getElementById("insurance1").checked){
+            insurance_price = 300;
+        }
+        if (document.getElementById("insurance2").checked){
+            insurance_price = 320;
+        }
+        if (document.getElementById("insurance3").checked){
+            insurance_price = 350;
+        }
+        if (document.getElementById("insurance4").checked){
+            insurance_price = 310;
+        }
+        if (document.getElementById("insurance5").checked){
+            insurance_price = 15;
+        }
+        if (document.getElementById("insurance6").checked){
+            insurance_price = 600;
+        }
+
+        total_investment = Number(insurance_price) + Number(solution_1_price) + Number(solution_2_price) + Number(solution_3_price) + Number(solution_4_price) + Number(solution_5_price)  + Number(solution_6_price)  + Number(solution_7_price)  + Number(solution_8_price) ;
+
+        document.getElementById("investment").innerText = total_investment;
+        document.getElementById("investment").value = total_investment;
+
+        document.getElementById("solution4_out").innerText = document.getElementById("solution4").value;
+    }
+
+    window.onload = cumpute_investment();
+</script>
+
+
+<script type="text/javascript">
+    function update_maximum(){
+        document.getElementById("maxval4").innerText = 20+Number(document.getElementById("input1").value)
+        document.getElementById("maxval5").innerText = 10+Number(document.getElementById("input2").value)
+        document.getElementById("maxval6").innerText = 20+Number(document.getElementById("input3").value)
+        document.getElementById("input4").max = 20+Number(document.getElementById("input1").value)
+        document.getElementById("input5").max = 10+Number(document.getElementById("input2").value)
+        document.getElementById("input6").max = 20+Number(document.getElementById("input3").value)
+    }
+    window.onload = update_maximum();
+</script>
+
+
+<script type="text/javascript">
+    function check_limit_values(field) {
+
+        var value1 = document.getElementById("input1").value;
+        var value2 = document.getElementById("input2").value;
+        var value3 = document.getElementById("input3").value;
+        var field4 = document.getElementById("input4");
+        var field5 = document.getElementById("input5");
+        var field6 = document.getElementById("input6");
+
+        if (field.name == "input1"){
+            field.value = Math.min(value1, 30-value2-value3);
+            field4.max = 20+Number(field.value);
+            field4.value = Math.min(field4.value, field4.max);
+            document.getElementById("output1").innerText = field.value;
+            document.getElementById("maxval4").innerText = 20+Number(field.value);
+            document.getElementById("output4").innerText = field4.value;
+        }
+        if (field.name == "input2"){
+            field.value = Math.min(value2, 30-value1-value3);
+            field5.max = 10+Number(field.value);
+            field5.value = Math.min(field5.value, field5.max);
+            document.getElementById("output2").innerText = field.value;
+            document.getElementById("maxval5").innerText = 10+Number(field.value);
+            document.getElementById("output5").innerText = field5.value;
+        }
+        if (field.name == "input3"){
+            field.value = Math.min(value3, 30-value2-value1);
+            field6.max = 20+Number(field.value);
+            field6.value = Math.min(field6.value, field6.max);
+            document.getElementById("output3").innerText = field.value;
+            document.getElementById("maxval6").innerText = 20+Number(field.value);
+            document.getElementById("output6").innerText = field6.value;
+        }
+    
+    }
+</script>
+
+<script type="text/javascript">
+    function check_limit_values_2(field) {
+
+        var value7 = document.getElementById("input7").value;
+        var value8 = document.getElementById("input8").value;
+        var value9 = document.getElementById("input9").value;
+
+        if (field.name == "input7"){
+            field.value = Math.min(value7, 30-value8-value9);
+            document.getElementById("output7").innerText = field.value;
+        }
+        if (field.name == "input8"){
+            field.value = Math.min(value8, 30-value7-value9);
+            document.getElementById("output8").innerText = field.value;
+        }
+        if (field.name == "input9"){
+            field.value = Math.min(value9, 30-value8-value7);
+            document.getElementById("output9").innerText = field.value;
+        }
+        
+    }
+</script>
+
+
+{% endblock %}
+

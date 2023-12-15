@@ -1,0 +1,178 @@
+
+{% load static %}
+
+<style>
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 0px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  bottom: 105%;
+  left: 50%;
+  margin-left: -60px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+
+{% if page == 4 %}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+{% endif %}
+{% if page == 9 %}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+{% endif %}
+</style>
+
+
+<div class="column pb-0 pl-0" style="vertical-align: bottom; margin-top: auto;">
+  <aside class="menu has-text-centered mb-2">
+    <p class="menu-label">
+      PAGE MENU
+    </p>
+    <ul class="menu-list m-1">
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-info {% if page != 1 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-description'%}">1. Company Description</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-info {% if page != 2 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-suppliers'%}">2. Key Suppliers</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-info {% if page != 3 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-resilience'%}">3. Resilience practices</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-danger {% if page != 4 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-bia'%}">4. BIA {% if bia_running %} <span class="tag is-success">OPEN</span> {% else %} <span class="tag is-danger">CLOSED</span> {% endif %}</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-info {% if page != 5 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-threat'%}">5. Threat description</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-info {% if page != 6 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-vulnerability'%}">6. Vulnerability estimation</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-info {% if page != 7 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-insurance'%}">7. Insurance options</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-info {% if page != 8 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-solutions'%}">8. BC solutions</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      <a class="m-1 button is-danger {% if page != 9 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-strategy'%}">9. BC strategy setting {% if strategy_running %} <span class="tag is-success">OPEN</span> {% else %} <span class="tag is-danger">CLOSED</span> {% endif %}</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+
+      <div class="tooltip" style="width: 100%">
+      {% if request.session.simulation_done %}
+      <a class="m-1 button is-success {% if page != 10 %} is-light is-outlined {% endif %} is-rounded" href="{% url 'autoparts-results'%}">10. Results</a>
+      <span class="tooltiptext">Remember to submit Form</span></div>
+      {% endif %}
+    </ul>
+  </aside>
+
+
+  <div class="tooltip" style="width: 100%">
+
+  <div class="has-text-centered mb-4">
+
+    {% if page != 0 %}
+    <a class="button is-info is-size-5 p-3" 
+    {% if page == 1 %} href="{% url 'autoparts-introduction'%}" {% endif %} 
+    {% if page == 2 %} href="{% url 'autoparts-description'%}" {% endif %} 
+    {% if page == 3 %} href="{% url 'autoparts-suppliers'%}" {% endif %} 
+    {% if page == 4 %} href="{% url 'autoparts-resilience'%}" {% endif %} 
+    {% if page == 5 %} href="{% url 'autoparts-bia'%}" {% endif %} 
+    {% if page == 6 %} href="{% url 'autoparts-threat'%}" {% endif %}
+    {% if page == 7 %} href="{% url 'autoparts-vulnerability'%}" {% endif %}
+    {% if page == 8 %} href="{% url 'autoparts-insurance'%}" {% endif %}
+    {% if page == 9 %} href="{% url 'autoparts-solutions'%}" {% endif %}
+    {% if page == 10 %} href="{% url 'autoparts-strategy'%}" {% endif %}
+    >
+
+    {%if page == 9 %}
+    <span class="icon">
+      <ion-icon src="{% static 'icons/arrow-back-circle-outline.svg' %}"></ion-icon>
+      </span>
+      {% else %}
+      <span class="icon">
+      <ion-icon src="{% static 'icons/arrow-back-circle-outline.svg' %}"></ion-icon>
+      </span>
+      <span><strong>BACK</strong></span>
+      {% endif %}
+
+    </a>
+
+    {% endif %}
+
+    
+    <a 
+    {% if page == 10 %}
+    class="button is-warning is-size-5 p-3 is-" 
+    {% else %}
+    class="button is-info is-size-5 p-3" 
+    {% endif %}
+
+    {% if page == 0 %} href="{% url 'autoparts-description'%}" {% endif %} 
+    {% if page == 1 %} href="{% url 'autoparts-suppliers'%}" {% endif %} 
+    {% if page == 2 %} href="{% url 'autoparts-resilience'%}" {% endif %} 
+    {% if page == 3 %} href="{% url 'autoparts-bia'%}" {% endif %} 
+    {% if page == 4 %} href="{% url 'autoparts-threat'%}" {% endif %} 
+    {% if page == 5 %} href="{% url 'autoparts-vulnerability'%}" {% endif %} 
+    {% if page == 6 %} href="{% url 'autoparts-insurance'%}" {% endif %}
+    {% if page == 7 %} href="{% url 'autoparts-solutions'%}" {% endif %}
+    {% if page == 8 %} href="{% url 'autoparts-strategy'%}" {% endif %} 
+    {% if page == 9 %} href="{% url 'autoparts-loading'%}" {% endif %} 
+    {% if page == 10 %} href="{% url 'autoparts-pdf' '1'%}" {% endif %} 
+    >
+
+
+    {% if page == 10 %}
+    <span><strong>PDF</strong></span>
+    <span class="icon">
+    <ion-icon src="{% static 'icons/download-outline.svg' %}"></ion-icon>
+    </span>
+    {% else %}
+      {% if page == 9 %}
+        <span><strong>SIMULATION</strong></span>
+        <span class="icon">
+        <ion-icon src="{% static 'icons/arrow-forward-circle-outline.svg' %}"></ion-icon>
+        </span>
+      {% else %}
+        <span><strong>NEXT</strong></span>
+        <span class="icon">
+        <ion-icon src="{% static 'icons/arrow-forward-circle-outline.svg' %}"></ion-icon>
+        </span>
+      {% endif %}
+    {% endif %}
+
+
+    </a>
+
+  </div>
+  <span class="tooltiptext">Remember to submit Form</span></div>
+
+
+</div>

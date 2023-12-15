@@ -1,0 +1,46 @@
+
+
+{% extends 'electricity/electricity_base.html' %}
+
+{% block title %}
+
+Introduction
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="content">
+  Developing and simulating a Business Continuity Strategy for an Electricity Distributor
+</div>
+
+<div class="content">
+    In this simulation game the player will be a Business Continuity Manager of an electricity distributor Eldy. Players will face a series of choices and make decisions to define the key BC strategies and parameters for Eldy. These choices impact the performance in an earthquake scenario, and players are scored based on these outcomes.
+    <br>
+    The simulation will calculate the financial performance considering:
+    <ul>
+    <li>BC implementation costs, related to the development and execution of a BC strategy;</li>
+    <li>Insurance premium;</li>
+    <li>Direct losses from business disruption of lower level performance;</li>
+    <li>BC deployment costs, related to the business recovery solutions activated following a disruption;</li>
+    <li>Insurance coverage.</li>
+    </ul>
+    In each step of the simulation (daily steps) the performance and the losses are calculated.
+</div>
+
+<h1 class="subtitle is-4 has-text-dark">GAME FLOW</h1>
+
+<img src="{% static 'game_flow.png' %}" width="700">
+<img src="{% static 'flow_legend.png' %}" width="250">
+
+
+
+{% endblock %}
+
+
+{% block menu %}
+	{% include "electricity/electricity_menu.html" with page=0 %}
+{% endblock %}
+

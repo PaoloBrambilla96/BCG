@@ -1,0 +1,213 @@
+
+
+{% extends 'electricity/electricity_base.html' %}
+
+{% block title %}
+
+BC Solutions
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<article class="message is-info">
+                              <div class="message-header">
+                                Solution 1
+                              </div>
+                              <div class="message-body">
+                              Eldy can introduce a satellite connectivity that can work even when telecommunication systems are disrupted. 
+                              <br>In this way, metering activities can be performed avoiding revenue losses. 
+
+ 
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 2
+                              </div>
+                              <div class="message-body">
+                                Eldy can decide to perform onsite metering in the event of a disruption to digital metering activities. 
+                                <br>This solution can avoid a loss of revenues, but its effective applicability depends on the availability of vehicles and personnel.
+
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 3
+                              </div>
+                              <div class="message-body">
+                                Eldy can introduce an electrical fleet to perform maintenance and emergency response even if petrol refueling is disrupted.
+                                <br>In the event of an earthquake, electrical vehicles are damaged as shown in the table of vulnerabilities.
+
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 4
+                              </div>
+                              <div class="message-body">
+                                Eldy can increase fuel storage capacity to perform maintenance and emergency response even if petrol refueling is disrupted. The fuel stock would be placed in the warehouse. 
+                                <br>The maximum amount of days of fuel stock that Eldy could introduce is 50 days. 
+                                <br>During normal operations, the replenishment occurs every 10 days. 
+                                <br>During emergencies, when petrol refueling is disrupted for more than 10 days, Eldy can consume the entire stock and thus withstand the lack of refueling according to the days of fuel stock introduced. Once petrol refueling is restored, stock is replenished to the maximum level. 
+                                <br>In the event of an earthquake, it is assumed that fuel stock is not lost. The initial default stocking capacity is always the maximum level (20-days of already existing storage capacity + days of additional storage capacity).
+
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 5
+                              </div>
+                              <div class="message-body">
+                                Eldy can introduce a backup operation center  to continue its control and monitoring activities even in case of inaccessibility of the main facility. The available options are:
+                                <ul>
+                                  <li>Fix backup operations center;</li>
+                                  <li>Mobile backup operations center.</li>
+                                </ul>
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 6
+                              </div>
+                              <div class="message-body">
+                                Eldy could strengthen buildings to make them earthquake-proof. The solution is applicable to:
+                                <ul>
+                                  <li>Facilities;</li>
+                                  <li>Warehouse.</li>
+                                </ul>
+                              </div>
+                            </article>
+
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 7
+                              </div>
+                              <div class="message-body">
+                                Eldy can improve grid reliability for guaranteeing electricity distribution at least to essential services, thus avoiding contractual penalties (note that penalties are avoided just if also electricity transmission is functional). 
+                                <br>First of all, by adopting this solution Eldy will introduce the mesh network configuration: a mesh network introduces backup redundancies to the electricity network already managed by the company and ensures that there are alternate channels in case of a fault of a grid component. 
+                                <br>Moreover, this solution includes a series of interventions to strengthen the step-down transformers that allow reaching the essential services’ locations. Besides avoiding the contractual penalties, the improvement of grid reliability enables to reduce distribution disruption level by 50%. 
+
+                              </div>
+                            </article>
+
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 8
+                              </div>
+                              <div class="message-body">
+                                Eldy can decide to keep a backup IT equipment to face disruptive situations. 
+                                <br>The backup equipment will be kept in a remote location and activated in case of disruption to the main equipment.
+
+
+                              </div>
+                            </article>
+
+
+
+
+
+
+                            <table class="table is-size-6 is-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Solution</th>
+                                  <th>Achievable RTO</th>
+                                  <th>Achievable RLO</th>
+                                  <th>BCP Implementation cost (for 10 years)</th>
+                                  <th>BCP Deployment cost</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1. Satellite connectivity</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€200K</td>
+                                  <td>€1K daily</td>
+                                </tr>
+                                <tr>
+                                  <td>2. Onsite metering</td>
+                                  <td>48 hours</td>
+                                  <td>100%</td>
+                                  <td>0</td>
+                                  <td>€5K daily</td>
+                                </tr>
+                                <tr>
+                                  <td>3. Electrical fleet</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€1M</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>4. Fuel storage capacity</td>
+                                  <td>/</td>
+                                  <td>100%</td>
+                                  <td>€2K every 10-days stock</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>5a. Fix backup operation center</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€500k</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>5b. Mobile backup operation center</td>
+                                  <td>24 hours</td>
+                                  <td>/</td>
+                                  <td>€200k</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>6a. Strengthening facilities</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€90K</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>6b. Strengthening warehouse</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€50k</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>7. Improving grid reliability</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€1M</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>8. IT backup</td>
+                                  <td>48 hours</td>
+                                  <td>/</td>
+                                  <td>€500K</td>
+                                  <td>0</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                      
+
+                          
+ 
+
+{% endblock %}
+
+
+{% block menu %}
+  {% include "electricity/electricity_menu.html" with page=8 %}
+{% endblock %}

@@ -1,0 +1,73 @@
+
+{% load static %}
+<nav class="navbar is-info is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{% url 'electricity-introduction'%}">
+      <img src="{% static 'POLIMI_white.png' %}" alt="Logo" width="110" height="60">
+    </a>
+  </div>
+
+  <div id="navbarTitle" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item">
+        <h1 class="title is-4 has-text-white"><strong>CM SERIOUS GAME - Electricity distributor</strong></h1>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+                    
+
+          {% if user.is_authenticated %}
+
+          <div class="navbar-item">
+            <p class="text is-4 has-text-white">{{request.user}} authenticated</p>
+          </div>
+          <a class="button is-light" href="{% url 'logout'%}">
+                <span class="icon">
+                  <ion-icon src="{% static 'icons/log-out-outline.svg' %}"></ion-icon>
+                </span>
+                <span><strong>Terminate and LOGOUT</strong></span>
+          </a>
+
+              {% if user.is_superuser  %}
+              <div class="navbar-item">
+                <p class="text is-4 has-text-white">ADMIN: </p>
+              </div>
+
+              <a class="button is-warning" href="../../admin">
+                <span class="icon">
+                  <ion-icon src="{% static 'icons/apps-outline.svg' %}"></ion-icon>
+                </span>
+                <span><strong>DASH</strong></span>
+              </a>
+              <a class="button is-warning" href="{% url 'common-control'%}">
+                <span class="icon">
+                  <ion-icon src="{% static 'icons/settings-outline.svg' %}"></ion-icon>
+                </span>
+                <span><strong>CONTROL</strong></span>
+              </a>
+
+              {% endif %}
+
+          {% else %}
+
+
+          <div class="navbar-item">
+            <p class="text is-4 has-text-white">Login required</p>
+          </div>
+          <a class="button is-light" href="{% url 'login'%}">
+                <span class="icon">
+                  <ion-icon src="{% static 'icons/log-in-outline.svg' %}"></ion-icon>
+                </span>
+                <span><strong>LOGIN</strong></span>
+          </a>
+
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

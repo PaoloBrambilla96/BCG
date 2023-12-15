@@ -1,0 +1,67 @@
+
+
+{% extends 'electricity/electricity_base.html' %}
+
+{% block title %}
+
+Threat description
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+                            <figure class="image"><img style="max-width: 900px;" src="{% static 'threat.png' %}" alt="Threat image"></figure>
+
+                            <br>
+                            Carware gathered information about the return time of the earthquakes based on the intensity (Magnitude – M)
+                            <br><br>
+
+
+                            <table class="table is-bordered" style="max-width: 800px;">
+                              <thead>
+                                <tr>
+                                  <th>M</th>
+                                  <th>Return Time [years]</th>
+                                  <th>Percentage of Occurrence over 10 years [%]</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>5-</td>
+                                  <td>1.09</td>
+                                  <td>100%</td>
+                                </tr>
+                                <tr>
+                                  <td>5-6</td>
+                                  <td>5.38</td>
+                                  <td>87.21%</td>
+                                </tr>
+                                <tr>
+                                  <td>6-7</td>
+                                  <td>303</td>
+                                  <td>3.25%</td>
+                                </tr>
+                                <tr>
+                                  <td>7-8</td>
+                                  <td>915</td>
+                                  <td>1.09%</td>
+                                </tr>
+                                <tr>
+                                  <td>8+</td>
+                                  <td>3000</td>
+                                  <td>0.33%</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+
+                          
+ 
+
+{% endblock %}
+
+
+{% block menu %}
+  {% include "electricity/electricity_menu.html" with page=5 %}
+{% endblock %}

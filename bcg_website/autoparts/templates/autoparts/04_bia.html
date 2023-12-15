@@ -1,0 +1,513 @@
+
+
+{% extends 'autoparts/autoparts_base.html' %}
+
+{% block title %}
+
+Business Impact Analysis
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+{% if bia_running %}
+<article class="message is-info">
+                          <div class="message-header">
+                            1 Irrecoverable losses:
+                          </div>
+                          <div class="message-body">
+                            <ul>
+                              <li>Non-deliveries, i.e., orders that were issued but finally were not delivered due to Carware’s low performance. Online and offline orders are cancelled if not shipped within 20 days, with no penalty.</li>
+                              <li>Missed sales, i.e., loss of sales which comes from the opportunities missed, orders not taken or contracts that cannot be signed due to the unavailability of one or more Carware’s functions.</li>
+                            </ul>
+                          </div>
+                        </article>
+                        <div class="columns">
+                          <div class="column">
+                            <article class="message is-info">
+                              <div class="message-header">
+                                2 Contractual penalties:
+                              </div>
+                              <div class="message-body">
+                                Applied on contractual partners’ orders, which happen in case the delivery is delayed:
+                                <ul>
+                                  <li>Over 30 days (20% of the order value)</li>
+                                  <li>Over 60 days (50% of the order value)</li>
+                                  <li>Over 90 days (80% of the order value)</li>
+                                </ul>
+                              </div>
+                            </article>
+                          </div>
+                          <div class="column is-one-third">
+                            <article class="message is-info">
+                              <div class="message-header">
+                                3 Integrity loss of assets:
+                              </div>
+                              <div class="message-body">
+                                Assets partially or totally destroyed following a disruption.
+                              </div>
+                            </article>
+                          </div>
+                        </div>
+
+                        Starting from the information about the types of losses, players will be able to evaluate the financial impact over time that Carware would suffer following a disruption. <br>
+                        Players will have to fill the table calculating financial impacts coming from the interruption of each activity for a certain number of days. For each activity, the severity of the impact over time can be evaluated in absent, low, medium or high. <br>
+                        Finally, the obtained results will be used to assess the Maximum Tolerable Period of Disruption (MTPD) and the Recovery Time Objective (RTO). <br>
+
+                        <br><br>
+
+                        For each activity, the severity of the financial impacts over time can be evaluated considering the following table.
+                        <br>
+
+                        <table class="table is-bordered">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>IMPACT</th>
+                              <th>ECONOMIC LOSS</th>
+                              <th>COMMENT</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th class="has-background-grey-lighter">0</th>
+                              <th class="has-background-grey-lighter">No Impact</th>
+                              <td>€ 0</td>
+                              <td>No Economic loss</td>
+                            </tr>
+                            <tr>
+                              <th class="has-background-success">1</th>
+                              <th class="has-background-success">Low</th>
+                              <td>€ [0-10M]</td>
+                              <td>Economic impact that can be absorbed but it requires an effort from management to absorb it</td>
+                            </tr>
+                            <tr>
+                              <th class="has-background-warning">2</th>
+                              <th class="has-background-warning">Medium</th>
+                              <td>€ [10-40M]</td>
+                              <td>Economic impact that can be absorbed but it requires an extraordinary involvement of management</td>
+                            </tr>
+                            <tr>
+                              <th class="has-background-danger">3</th>
+                              <th class="has-background-danger">High</th>
+                              <td>> € 40M</td>
+                              <td>Economic impact that requires a change of strategy</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <br>
+                        <strong>Rememer to sbmit the Form before to change page</strong>
+                        <br>
+
+                        <form action="" method="POST" id="BIA_form" name="BIA_form">
+                        {% csrf_token %}
+
+                        <table class="table is-bordered is-size-6">
+                          <thead>
+                            <tr>
+                              <th rowspan="2">Carware activities</th>
+                              <th colspan="11">Impacts evaluation</th>
+                              <th rowspan="2">MTPD</th>
+                              <th rowspan="2">RTO</th>
+                            </tr>
+                            <tr>
+                              <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">days</th>
+                              <th>1-3</th>
+                              <th>3-7</th>
+                              <th>7-14</th>
+                              <th>14-30</th>
+                              <th>30-45</th>
+                              <th>45-60</th>
+                              <th>60-90</th>
+                              <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">90-180</th>
+                              <th class="px-1" style="vertical-align: middle; margin-top: auto; width: min-content;">180-360</th>
+                              <th>>360</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            <tr>
+                              <th rowspan="4">Manufacturing</th>
+                              <td class="py-0">Contarctual<br>sales</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_0_{{n_col}}" name="table_0_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                              <td rowspan="4" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="MTPD_0" name="MTPD_0" class="has-background-grey-lighter" onchange="" onclick="">
+                                    <option class="" value="3">3</option>
+                                    <option class="" value="7">7</option>
+                                    <option class="" value="30">30</option>
+                                    <option class="" value="45">45</option>
+                                    <option class="" value="60">60</option>
+                                    <option class="" value="90">90</option>
+                                    <option class="" value="180">180</option>
+                                    <option class="" value="360">360</option>
+                                    <option class="" value="0">0</option>
+                                  </select>
+                                </div>
+                              </td>
+                              <td rowspan="4" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="RTO_0" name="RTO_0" class="has-background-grey-lighter" onchange="" onclick="">
+                                    <option class="" value="3">3</option>
+                                    <option class="" value="7">7</option>
+                                    <option class="" value="30">30</option>
+                                    <option class="" value="45">45</option>
+                                    <option class="" value="60">60</option>
+                                    <option class="" value="90">90</option>
+                                    <option class="" value="180">180</option>
+                                    <option class="" value="360">360</option>
+                                    <option class="" value="0">0</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td class="py-0">Offline<br>sales</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_1_{{n_col}}" name="table_1_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <td class="py-0">Non-delivery<br>sales</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_2_{{n_col}}" name="table_2_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <td class="py-0">Contractual<br>penalties</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_3_{{n_col}}" name="table_3_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <th rowspan="4">Assembly</th>
+                              <td class="py-0">Contarctual<br>sales</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_4_{{n_col}}" name="table_4_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                              <td rowspan="4" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="MTPD_1" name="MTPD_1" class="has-background-grey-lighter" onchange="" onclick="">
+                                    <option class="" value="3">3</option>
+                                    <option class="" value="7">7</option>
+                                    <option class="" value="30">30</option>
+                                    <option class="" value="45">45</option>
+                                    <option class="" value="60">60</option>
+                                    <option class="" value="90">90</option>
+                                    <option class="" value="180">180</option>
+                                    <option class="" value="360">360</option>
+                                    <option class="" value="0">0</option>
+                                  </select>
+                                </div>
+                              </td>
+                              <td rowspan="4" class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="RTO_1" name="RTO_1" class="has-background-grey-lighter" onchange="" onclick="">
+                                    <option class="" value="3">3</option>
+                                    <option class="" value="7">7</option>
+                                    <option class="" value="30">30</option>
+                                    <option class="" value="45">45</option>
+                                    <option class="" value="60">60</option>
+                                    <option class="" value="90">90</option>
+                                    <option class="" value="180">180</option>
+                                    <option class="" value="360">360</option>
+                                    <option class="" value="0">0</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td class="py-0">Offline<br>sales</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_5_{{n_col}}" name="table_5_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <td class="py-0">Non-delivery<br>sales</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_6_{{n_col}}" name="table_6_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <td class="py-0">Contractual<br>penalties</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_7_{{n_col}}" name="table_7_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                            </tr>
+
+                            <tr>
+                              <th class="py-0">Order<br>acquisition</th>
+                              <td class="py-0">Online<br>sales</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_8_{{n_col}}" name="table_8_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="MTPD_2" name="MTPD_2" class="has-background-grey-lighter" onchange="" onclick="">
+                                    <option class="" value="3">3</option>
+                                    <option class="" value="7">7</option>
+                                    <option class="" value="30">30</option>
+                                    <option class="" value="45">45</option>
+                                    <option class="" value="60">60</option>
+                                    <option class="" value="90">90</option>
+                                    <option class="" value="180">180</option>
+                                    <option class="" value="360">360</option>
+                                    <option class="" value="0">0</option>
+                                  </select>
+                                </div>
+                              </td>
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="RTO_2" name="RTO_2" class="has-background-grey-lighter" onchange="" onclick="">
+                                    <option class="" value="3">3</option>
+                                    <option class="" value="7">7</option>
+                                    <option class="" value="30">30</option>
+                                    <option class="" value="45">45</option>
+                                    <option class="" value="60">60</option>
+                                    <option class="" value="90">90</option>
+                                    <option class="" value="180">180</option>
+                                    <option class="" value="360">360</option>
+                                    <option class="" value="0">0</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <th class="py-0">IT systems</th>
+                              <td class="py-0">Online<br>sales</td>
+                              {% for n_col in cols %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="table_9_{{n_col}}" name="table_9_{{n_col}}" class="has-background-grey-lighter" onchange="update_color(this)" onclick="update_color(this)">
+                                    <option class="has-background-grey-lighter" value="0">0</option>
+                                    <option class="has-background-success" value="1">1</option>
+                                    <option class="has-background-warning" value="2">2</option>
+                                    <option class="has-background-danger" value="3">3</option>
+                                  </select>
+                                </div>
+                              </td>
+                              {% endfor %}
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="MTPD_3" name="MTPD_3" class="has-background-grey-lighter" onchange="" onclick="">
+                                    <option class="" value="3">3</option>
+                                    <option class="" value="7">7</option>
+                                    <option class="" value="30">30</option>
+                                    <option class="" value="45">45</option>
+                                    <option class="" value="60">60</option>
+                                    <option class="" value="90">90</option>
+                                    <option class="" value="180">180</option>
+                                    <option class="" value="360">360</option>
+                                    <option class="" value="0">0</option>
+                                  </select>
+                                </div>
+                              </td>
+                              <td class="p-0" style="vertical-align: middle; margin-top: auto; width: min-content;">
+                                <div class="select py-0 m-1">
+                                  <select id="RTO_3" name="RTO_3" class="has-background-grey-lighter" onchange="" onclick="">
+                                    <option class="" value="3">3</option>
+                                    <option class="" value="7">7</option>
+                                    <option class="" value="30">30</option>
+                                    <option class="" value="45">45</option>
+                                    <option class="" value="60">60</option>
+                                    <option class="" value="90">90</option>
+                                    <option class="" value="180">180</option>
+                                    <option class="" value="360">360</option>
+                                    <option class="" value="0">0</option>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+
+
+                          </tbody>
+                        </table>
+
+                        <input class="button is-danger is-size-2" type="submit" value="SUBMIT BIA FORM"></input>
+
+                        </form>
+
+                        <br>
+                        <strong>Rememer to sbmit the Form before to change page</strong>
+                        <br>
+
+{% else %}
+
+<article class="message is-danger">
+    <div class="message-header">
+        <p class="is-size-4">PERMISSION DENIED</p>
+    </div>
+    <div class="message-body">
+        <br><br>
+        <p class="is-size-5">Simulation is disabled by the administrator</p>
+        <br><br>
+    </div>
+</article>
+
+
+{% endif %}
+
+
+
+{% endblock %}
+
+
+{% block menu %}
+	{% include "autoparts/autoparts_menu.html" with page=4 %}
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript">
+      function update_color(element){ 
+          if(element.getElementsByTagName('option')[0].selected){
+            element.className = "has-background-grey-lighter"
+          }   
+          if(element.getElementsByTagName('option')[1].selected){
+            element.className = "has-background-success"
+          }   
+          if(element.getElementsByTagName('option')[2].selected){
+            element.className = "has-background-warning"
+          }   
+          if(element.getElementsByTagName('option')[3].selected){
+            element.className = "has-background-danger"
+          }
+      }
+    </script>
+
+    
+
+    <script type="text/javascript">
+      function select_option(){
+        {% for name, value in selectnames %}
+            document.getElementById("{{name}}").getElementsByTagName('option')[{{value}}].selected = true;
+            update_color(document.getElementById("{{name}}"));
+        {% endfor %}
+      }
+    window.onload = select_option();
+    </script>
+
+
+    <script type="text/javascript">
+      function select_option_2(){
+        {% for name, value in mtpdnames %}
+            for (let k=0; k<9; k++){
+              if (document.getElementById("MTPD_{{name}}").getElementsByTagName('option')[k].value == {{value}}){
+                document.getElementById("MTPD_{{name}}").getElementsByTagName('option')[k].selected = true;
+              }
+            }
+        {% endfor %}
+      }
+    window.onload = select_option_2();
+    </script>
+
+
+    <script type="text/javascript">
+      function select_option_3(){
+        {% for name, value in rtonames %}
+            for (let k=0; k<9; k++){
+              if (document.getElementById("RTO_{{name}}").getElementsByTagName('option')[k].value == {{value}}){
+                document.getElementById("RTO_{{name}}").getElementsByTagName('option')[k].selected = true;
+              }
+            }
+        {% endfor %}
+      }
+    window.onload = select_option_3();
+    </script>
+
+
+{% endblock %}

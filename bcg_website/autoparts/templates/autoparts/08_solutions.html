@@ -1,0 +1,185 @@
+
+
+{% extends 'autoparts/autoparts_base.html' %}
+
+{% block title %}
+
+BC Solutions
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<article class="message is-info">
+                              <div class="message-header">
+                                Solution 1
+                              </div>
+                              <div class="message-body">
+                              Carware could <strong>increase the warehouse capacity</strong> for storing finished products to make sure it can keep the production running when shipping is disrupted. The maximum available space for this is 1000m2 (100m2 correspond to 1 day of production). 
+                              <br>Consider that the current capacity is 10 days and that the default stock level is 1 day (what is assembled and shipped the next day, according to the ATO business strategy).
+ 
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 2
+                              </div>
+                              <div class="message-body">
+                                Carware could <strong>increase stocking capacity</strong> for:
+                                <ul>
+                                  <li>Raw materials, to make sure it can maintain manufacturing of internal parts for longer periods when the inbound logistics are disrupted (100m2 correspond to a day of raw materials supply). Consider that the current capacity is 20 days and that the default stock level is 10 days.</li>
+                                  <li>Internal parts, to make sure it can maintain assembly for longer periods when manufacturing is disrupted (100m2 correspond to a day of internal parts used by Assembly at the full capacity). Consider that the current capacity is 10 days and that the default stock level is 5 days.</li>
+                                  <li>External parts, to make sure it can maintain assembly for longer periods when the inbound logistics are disrupted (100m2 correspond to a day of external parts used by Assembly at the full capacity). Consider that the current capacity is 10 days and that the default stock level is 5 days.</li>
+                                </ul>
+                              The maximum available space for the three alternatives is 3000m2 (overall).
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 3
+                              </div>
+                              <div class="message-body">
+                                Carware could introduce a <strong>backup equipment</strong> for:
+                                <ul>
+                                  <li>Manufacturing: the equipment is kept ready in a remote location. It can be delivered in 2 days and the manufacturing process can be restored 3 days later.</li>
+                                  <li>Assembly: the equipment is kept ready in a remote location. It can be delivered in 2 days and the assembly process can be restored 2 days later.</li>
+                                </ul>
+                                They will be kept ready in a remote location and activated in case of disruption to the main equipment.
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 4
+                              </div>
+                              <div class="message-body">
+                                Carware could activate an <strong>alternative shipping</strong> for:
+                                <ul>
+                                  <li>Inbound delivery of raw materials (using road instead of rail); each truck covers 5% of the original raw material logistics capacity).</li>
+                                  <li>Inbound delivery of external parts (using road instead of rail); each truck covers 4% of the original external parts logistics capacity.</li>
+                                  <li>Outbound transport of finished products (using road instead of rail); each truck covers 3% of the original finished products shipping capacity.</li>
+                                </ul>
+                                The maximum number of trucks that overall can be activated is 30.
+                              </div>
+                            </article>
+
+                            <article class="message is-info">
+                              <div class="message-header">
+                                Solution 5
+                              </div>
+                              <div class="message-body">
+                                Carware could <strong>strengthen buildings</strong> to make them earthquake-proof. In this way the damage to buildings would be avoided (no repair/rebuild costs), therefore they would be available for use after 1 day of inspection. Strengthening the Warehouse would also prevent the loss of inventory of both internal and external parts, while damage to the equipment would remain the same due to the shaking. The solution is applicable to:
+                                <ul>
+                                  <li>Main facility;</li>
+                                  <li>Warehouse;</li>
+                                  <li>Logistics center.</li>
+                                </ul>
+                              </div>
+                            </article>
+
+
+                            <table class="table is-size-6 is-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Solution</th>
+                                  <th>Achievable RTO</th>
+                                  <th>Achievable RLO</th>
+                                  <th>BCP Implementation cost (for 10 years)</th>
+                                  <th>BCP Deployment cost</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1. Finished products storage</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€3K/100m<sup>2</sup></td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>2a. Increasing raw materials stocking capacity</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€1K/100m<sup>2</sup></td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>2b. Increasing internal parts stocking capacity</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€2K/100m<sup>2</sup></td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>2c. Increasing external parts stocking capacity</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€2K/100m<sup>2</sup></td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>3a. Backup manufacturing equipment</td>
+                                  <td>5 days</td>
+                                  <td>100%</td>
+                                  <td>€125k</td>
+                                  <td>€50k</td>
+                                </tr>
+                                <tr>
+                                  <td>3b. Backup assembly equipment</td>
+                                  <td>4 days</td>
+                                  <td>100%</td>
+                                  <td>€75k</td>
+                                  <td>€50k</td>
+                                </tr>
+                                <tr>
+                                  <td>4a. Alternative inbound shipping</td>
+                                  <td>0 days</td>
+                                  <td>Up to 100%</td>
+                                  <td>0</td>
+                                  <td>Up to €60k daily (€2K/truck)</td>
+                                </tr>
+                                <tr>
+                                  <td>4b. Alternative outbound shipping</td>
+                                  <td>0 days</td>
+                                  <td>Up to 100%</td>
+                                  <td>0</td>
+                                  <td>Up to €60k daily (€2K/truck)</td>
+                                </tr>
+                                <tr>
+                                  <td>5a. Strengthening main facility</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€90K</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>5b. Strengthening warehouse</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€50K</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td>5c. Strengthening logistics center</td>
+                                  <td>/</td>
+                                  <td>/</td>
+                                  <td>€50K</td>
+                                  <td>0</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                      
+
+                          
+ 
+
+{% endblock %}
+
+
+{% block menu %}
+  {% include "autoparts/autoparts_menu.html" with page=8 %}
+{% endblock %}

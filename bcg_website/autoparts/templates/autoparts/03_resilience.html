@@ -1,0 +1,203 @@
+
+{% extends 'autoparts/autoparts_base.html' %}
+
+{% block title %}
+
+Resilience practices
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+Resilience (robustness) of business functions is defined as the ability to absorb disruptive events and retain operational integrity.<br>
+In the event of a disruption, Carware will always work on recovering the missed production by increasing the nominal level of its business functions, mainly Manufacturing and Assembly, along with the increased external services support (mainly logistics). Manufacturing and Assembly can be increased up to 75% above their nominal value (working in 3 shifts, 7 days a week), and this must be accompanied with the increased logistics service level (inbound and outbound). The average additional cost of this (overtime/night/weekend work) is €5000 daily for the Manufacturing and €5000 daily for the Assembly.<br>
+For online and offline orders there is no penalty, but if an order is not shipped within 20 days it is automatically cancelled and counts as non-delivery. The rule is that assembly/delivery priority is given to the contractual orders, which means if there is a backlog of contractual orders all the available capacities will be used to recover the contractual obligations (and avoid penalties); as soon as this is recovered, the additional capacity will be used to recover other remaining orders (online and offline).<br>
+<br>
+The table below displays interdependencies that each activity has with other external or internal factors. If one or more of the reported elements are disrupted, the functionality of the corresponding activity can be partially or totally compromised.<br>
+<br>
+
+<table class="table is-bordered">
+  <thead>
+    <tr>
+      <th>INTERDEPENDECIES</th>
+      <th>Responsible Function</th>
+      <th>Infrastructure</th>
+      <th>Asset</th>
+      <th>Suppliers/ dependencies</th>
+      <th>Internal dependency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Manufacturing process</th>
+      <td>Manufacturing department</td>
+      <td>Main facility; Warehouse; IT infrastructure</td>
+      <td>Manufacturing machinery</td>
+      <td>Raw materials’ supplier; Electricity; Maintenance; In logistics</td>
+      <td>Raw material stock</td>
+    </tr>
+    <tr>
+      <th>Assembly process</th>
+      <td>Assembly department</td>
+      <td>Logistic center; Warehouse; IT infrastructure</td>
+      <td>Assembly machinery</td>
+      <td>External parts’ supplier; Electricity; In/Out logistics</td>
+      <td>Internal parts storage</td>
+    </tr>
+    <tr>
+      <th>Order acquisition</th>
+      <td>Marketing and Sales</td>
+      <td>Main facility; IT infrastructure</td>
+      <td>/</td>
+      <td>Electricity</td>
+      <td>IT services; Administration</td>
+    </tr>
+    <tr>
+      <th>Billing</th>
+      <td>Administration</td>
+      <td>Main facility; IT infrastructure</td>
+      <td>/</td>
+      <td>Electricity</td>
+      <td>/</td>
+    </tr>
+    <tr>
+      <th>IT systems management</th>
+      <td>IT service</td>
+      <td>Main facility; IT infrastructure</td>
+      <td>/</td>
+      <td>Electricity</td>
+      <td>/</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+To avoid the complete interruption of its operations and absorb disruptive impacts, Carware can rely on a series of backup solutions.
+<br><br>
+
+<button class="js-modal-trigger button is-info is-size-6" data-target="modal-table-backup">
+  <span class="icon">
+  <ion-icon src="{% static 'icons/apps-outline.svg' %}"></ion-icon>
+  </span>
+  <span><strong>Show table of backup solutions</strong></span>
+</button>
+
+<div id="modal-table-backup" class="modal is-large">
+  <div class="modal-background"></div>
+  <div class="modal-content"  style="width: 75%; max-height: 90%;">
+    <div class="box" style="max-height: 80vh; overflow: auto;">
+
+      <h1 class="subtitle is-4 has-text-dark">Backup solutions</h1>
+      <table class="table is-bordered">
+        <thead>
+          <tr>
+            <th>Business function</th>
+            <th>People</th>
+            <th>Premises</th>
+            <th>Utilities</th>
+            <th>Providers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Manufacturing</td>
+            <td>Minimum Staff: 10</td>
+            <td>No alternative facility</td>
+            <td>No backup electricity</td>
+            <td>Alternative raw material suppliers; No alternative logistics provider</td>
+          </tr>
+          <tr>
+            <td>Assembly</td>
+            <td>Minimum Staff: 10</td>
+            <td>No alternative facility</td>
+            <td>No backup electricity</td>
+            <td>No alternative parts supplier; No alternative logistics provider</td>
+          </tr>
+          <tr>
+            <td>Marketing and Sales</td>
+            <td>Minimum Staff: 5</td>
+            <td>Staff can work from home</td>
+            <td>Electricity backup generator (24h)</td>
+            <td>No alternative electricity provider</td>
+          </tr>
+          <tr>
+            <td>Administration</td>
+            <td>Minimum Staff: 3</td>
+            <td>Staff can work from home</td>
+            <td>Electricity backup generator (24h)</td>
+            <td>No alternative electricity provider</td>
+          </tr>
+          <tr>
+            <td>IT Services</td>
+            <td>Minimum Staff: 2</td>
+            <td>No alternative facility</td>
+            <td>Electricity backup generator (24h)</td>
+            <td>No alternative electricity provider</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+{% endblock %}
+
+
+{% block menu %}
+	{% include "autoparts/autoparts_menu.html" with page=3 %}
+{% endblock %}
+
+
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Functions to open and close a modal
+  function openModal($el) {
+    $el.classList.add('is-active');
+  }
+
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      closeModal($modal);
+    });
+  }
+
+  // Add a click event on buttons to open a specific modal
+  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
+  });
+
+  // Add a click event on various child elements to close the parent modal
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
+
+  // Add a keyboard event to close all modals
+  document.addEventListener('keydown', (event) => {
+    const e = event || window.event;
+
+    if (e.keyCode === 27) { // Escape key
+      closeAllModals();
+    }
+  });
+});
+</script>
+{% endblock %}
+

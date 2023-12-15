@@ -1,0 +1,72 @@
+
+{% extends 'autoparts/autoparts_base.html' %}
+
+{% block title %}
+
+Key Suppliers
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="columns" style="height: 100%;">
+  <div class="column is-4" style="height: 100%;">
+    <div class="card" style="max-height: 100%; overflow: auto;">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48 mx-0">
+              <img src="{% static 'key_supplier.png' %}" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4 has-text-dark">KEY SUPPLIERS</p>
+          </div>
+        </div>
+        <div class="content">
+          <br>
+          Raw materials’ supplier, that provides materials for manufacturing internal parts.
+          <br>
+          External parts’ supplier, that provides external parts for assembling finished products together with internal parts.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column" style="height: 100%;">
+    <div class="card" style="max-height: 100%; overflow: auto;">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48 mx-0">
+              <img src="{% static 'external_dependencies.png' %}" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4 has-text-dark">EXTERNAL DEPENDENCIES</p>
+          </div>
+        </div>
+        <div class="content">
+          <br>
+          <strong>Electricity</strong>, needed for each of the main business functions. The electricity distributor that provides power in the region of Carware is Eldy. Further information about the company and its BC strategy can be found in the correspondent story.
+          <br>
+          <strong>Logistics</strong>, both inbound (i.e., required for raw materials and external parts supply) and outbound (i.e., required for finished products shipment). The logistics provider that serves Carware is LP. In particular, the contract with LP states that materials, parts and finished products are shipped by train through the global freight service. Further information about LP and its BC strategy can be found in the correspondent story.
+          <br>
+          <strong>Maintenance</strong>, necessary for the manufacturing machinery. Manufacturing performance in the absence of maintenance is approximated in steps, where each decrease is 20% larger than the previous.
+          <img src="{% static 'external_dependencies_image.png' %}" width="500">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+{% endblock %}
+
+
+{% block menu %}
+	{% include "autoparts/autoparts_menu.html" with page=2 %}
+{% endblock %}
+

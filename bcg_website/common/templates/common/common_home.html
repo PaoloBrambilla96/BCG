@@ -1,0 +1,145 @@
+
+
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+<head>
+{% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Businnes Continuity Game</title>
+    <link rel="stylesheet" href="{% static 'bulma.min.css' %}">
+    <link rel="icon" href="{% static 'favico.png' %}", sizes="32x32">
+</head>
+
+
+<body class="has-background-info-light has-navbar-fixed-top p-2">
+{% load static %}
+
+
+{% include "common/common_navbar.html" with is_home=1 %}
+
+<div class="card m-5 has-background-grey-lighter" style="height: 86vh; min-height: 700px;">
+  <div class="card-content" style="height: 100%;">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <img src="{% static 'icons/home-outline.svg' %}">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4 has-text-grey-dark">Home</p>
+      </div>
+    </div>
+
+    <div class="content" style="height: 93%;">
+                <div class="box" style="max-height: 100%; overflow: auto;">
+                	<h1>Business Coninuity Game</h1>
+
+				<br>
+                	L'accesso alle pagine successive è consentito solo agli utenti registrati
+
+
+				<br>
+				<br>
+				<a class="button is-info is-size-5" href="{% url 'login'%}">
+			    <span><strong>LOGIN</strong></span>
+			      <span class="icon">
+			      <ion-icon src="{% static 'icons/log-in-outline.svg' %}"></ion-icon>
+			      </span>
+			    </a>
+				<br>
+				<br>
+                	<img src="{% static 'LogoOrizzontale.png'%}" style="max-width: 300px;">
+
+				<br>
+<br>
+An engaging BC training, driving a culture of preparedness and resilience in organisations through an online simulation-based serious game:
+<ul>
+	<li>Learn BC principles through hands-on experience</li>
+	<li>Develop strategic and collaborative decision-making skills</li>
+	<li>Practice BC in a risk-free environment</li>
+	<li>Improve BC skills through real-time feedback</li>
+	<li>Understand complexities and interdependencies</li>
+	<li>Foster teamwork and collaboration</li>
+	<li>Enhance BCM awareness and maturity</li>
+</ul>
+<br>
+Go through the different simulation steps to develop a BCP:
+<ul>
+	<li>Take the role of Business Continuity Manager</li>
+	<li>Prepare for a realistic scenario</li>
+	<li>Develop a Business Impact Analysis</li>
+	<li>Assess risks and interdependencies</li>
+	<li>Simulate scenarios, reflect and improve</li>
+	<li>Set your BC strategy to minimize total BCP costs</li>
+	<li>Enhance resilience against external factors</li>
+	<li>Develop coordinated BCPs</li>
+	<li>Critically discuss prons and cons of alternative approaches</li>
+</ul>
+
+<br>
+<br>
+<br>
+
+Contacts: Paolo Trucco | School of Management | Politecnico di Milano | paolo.trucco@polimi.it
+Developed as part of RemLab project funded by the EC under the Erasmus+ program
+
+				<!--
+
+				Scarica il flyer in formato pdf per dettagli...
+				<br>
+
+				<a class="button is-warning is-size-5" href="#">
+			    <span><strong>PDF</strong></span>
+			      <span class="icon">
+			      <ion-icon src="{% static 'icons/download-outline.svg' %}"></ion-icon>
+			      </span>
+			    </a>
+			   -->
+
+
+				<br>
+				<br>
+
+
+			    L'accesso alle pagine successive è consentito solo agli utenti registrati
+				<br>
+				<br>
+				<a class="button is-info is-size-5" href="{% url 'login'%}">
+			    <span><strong>LOGIN</strong></span>
+			      <span class="icon">
+			      <ion-icon src="{% static 'icons/log-in-outline.svg' %}"></ion-icon>
+			      </span>
+			    </a>
+
+				</div>
+
+    </div>
+      
+
+  </div>
+</div>
+  
+
+
+<script type="module" src="{% static 'ionicons.esm.js' %}"></script>
+<script nomodule src="{% static 'ionicons.js' %}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+</script>
+
+
+
+
+</body>
+
+
+</html>

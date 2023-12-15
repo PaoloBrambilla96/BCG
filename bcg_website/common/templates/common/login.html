@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+<head>
+{% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Businnes Continuity Game</title>
+    <link rel="stylesheet" href="{% static 'bulma.min.css' %}">
+    <link rel="icon" href="{% static 'favico.png' %}", sizes="32x32">
+</head>
+
+
+<body class="has-background-info-light has-navbar-fixed-top p-2">
+
+
+{% include "common/common_navbar.html" %}
+
+<div class="card m-5 has-background-grey-lighter" style="height: 86vh; min-height: 700px;">
+  <div class="card-content" style="height: 100%;">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <img src="{% static 'icons/log-in-outline.svg' %}">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4 has-text-grey-dark">Authentication area</p>
+      </div>
+    </div>
+
+    <div class="content" style="height: 93%;">
+
+                            <article class="message is-light">
+                              <div class="message-header">
+                                <p>LOGIN AREA</p>
+                              </div>
+                              <div class="message-body">
+                                  Insert login credentials
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <form action="" method=POST>
+                                    {% csrf_token %}
+
+
+                                    <div class="mb-3">
+                                      <label for="username" class="label">Username</label>
+                                      <input type="text" class="input" name="username" placeholder="User group name">
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="password" class="label">Password</label>
+                                      <input type="password" class="input" name="password" placeholder="Password">
+                                    </div>
+                                  <br>
+                                    
+
+                                    <input type="submit" value="Login" class="button is-primary is-size-4">
+                                  </form>
+                              </div>
+                              
+                            </article>
+        
+
+                    
+
+
+
+    </div>
+      
+
+  </div>
+</div>
+                      
+
+            
+
+
+<script type="module" src="{% static 'ionicons.esm.js' %}"></script>
+<script nomodule src="{% static 'ionicons.js' %}"></script>
+
+
+</body>
+
+
+</html>
